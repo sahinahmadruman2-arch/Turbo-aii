@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>After All AI</title>
+  <style>
+    body {
+      background: #0d0d0d;
+      color: white;
+      font-family: Arial;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #00ffcc;
+    }
+
+    textarea {
+      width: 100%;
+      height: 120px;
+      background: #1a1a1a;
+      color: white;
+      border: none;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background: #00ffcc;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    #output {
+      white-space: pre-wrap;
+      margin-top: 20px;
+      background: #111;
+      padding: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>After All - Manga AI</h1>
+
+<textarea id="prompt" placeholder="Enter your manga idea..."></textarea>
+<button onclick="generate()">Generate Story</button>
+
+<div id="output">Your story will appear here...</div>
+
+<script>
+const API_KEY = "AIzaSyDjL-kWWSE1eQUKjAIjJE1BaZMNR6cIJkk";
+
+let memory = [];
+
+async function generate() {
+  let userInput = document.getElementById("prompt").value;
+
+  let context = memory.slice(-5).join("\n");
+
+  let fullPrompt = `
+You are "After All", a professional manga writer AI.
+
+Rules:
+- Write like a manga
+- Include dialogues
+- Add emotions
+- Keep scenes cinematic
+- Keep characters consistent
+
+Previous context:
+${context}
+
+User request:
+${userInput}
+`;
+
+  let response = await fetch(
+    "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + API_KEY,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        contents: [{
+          parts: [{ text: fullPrompt }]
+        }]
+      })
+    }
+  );
+
+  let data = await response.json();
+
+  let output = data.candidates?.[0]?.content?.parts?.[0]?.text || "Error generating story";
+
+  memory.push(userInput);
+  memory.push(output);
+
+  document.getElementById("output").innerText = output;
+}
+</script>
+
+</body>
+</html>
