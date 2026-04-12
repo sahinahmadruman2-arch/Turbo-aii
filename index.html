@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jarvis AI</title>
+</head>
+<body style="background:black;color:white;font-family:sans-serif">
+
+<h2>🤖 Jarvis AI</h2>
+
+<div id="chat"></div>
+
+<input id="input" placeholder="Type message..." />
+<button onclick="send()">Send</button>
+
+<script>
+async function send() {
+    let input = document.getElementById("input");
+    let chat = document.getElementById("chat");
+
+    let user = input.value;
+    chat.innerHTML += "<p>You: " + user + "</p>";
+
+    try {
+        let res = await fetch("https://api.affiliateplus.xyz/api/chatbot?message=" + user);
+        let data = await res.json();
+
+        chat.innerHTML += "<p>Jarvis: " + data.message + "</p>";
+    } catch (e) {
+        chat.innerHTML += "<p>Jarvis: Network problem 😅</p>";
+    }
+
+    input.value = "";
+}
+</script>
+
+</body>
+</html>
