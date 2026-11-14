@@ -1,107 +1,551 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="bn">
 <head>
-  <title>After All AI</title>
-  <style>
-    body {
-      background: #0d0d0d;
-      color: white;
-      font-family: Arial;
-      padding: 20px;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>নবীদের কাহিনী | Sahin Hujur</title>
 
-    h1 {
-      color: #00ffcc;
-    }
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@500;600;700&display=swap');
 
-    textarea {
-      width: 100%;
-      height: 120px;
-      background: #1a1a1a;
-      color: white;
-      border: none;
-      padding: 10px;
-      margin-bottom: 10px;
-    }
+*{margin:0;padding:0;box-sizing:border-box}
 
-    button {
-      padding: 10px 20px;
-      background: #00ffcc;
-      border: none;
-      cursor: pointer;
-      font-weight: bold;
-    }
+:root{
+--green:#123d30;
+--dark:#09271f;
+--gold:#d8b66a;
+--cream:#f8f3e8;
+}
 
-    #output {
-      white-space: pre-wrap;
-      margin-top: 20px;
-      background: #111;
-      padding: 15px;
-    }
-  </style>
+body{
+font-family:'Hind Siliguri',sans-serif;
+background:#0b211b;
+color:var(--cream);
+min-height:100vh;
+overflow-x:hidden;
+}
+
+body:before{
+content:"";
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at 20% 20%,#28544155,transparent 40%),
+radial-gradient(circle at 80% 80%,#b18b3b22,transparent 40%);
+pointer-events:none;
+}
+
+header{
+height:75px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 7%;
+border-bottom:1px solid #ffffff13;
+position:relative;
+z-index:2;
+}
+
+.logo{
+font-size:19px;
+font-weight:700;
+color:var(--gold);
+letter-spacing:1px;
+}
+
+.author{
+font-size:13px;
+color:#b7c7bc;
+}
+
+main{
+max-width:850px;
+margin:auto;
+padding:45px 20px 30px;
+position:relative;
+z-index:1;
+}
+
+.top-info{
+text-align:center;
+margin-bottom:25px;
+}
+
+.top-info small{
+color:var(--gold);
+letter-spacing:3px;
+font-size:11px;
+}
+
+.top-info h2{
+font-size:25px;
+margin-top:7px;
+}
+
+.progress-area{
+height:3px;
+background:#ffffff18;
+border-radius:10px;
+margin:25px 0;
+overflow:hidden;
+}
+
+.progress{
+height:100%;
+width:0%;
+background:var(--gold);
+transition:width .6s ease;
+}
+
+.book{
+perspective:1500px;
+min-height:480px;
+}
+
+.page{
+background:var(--cream);
+color:#26352c;
+border-radius:5px 15px 15px 5px;
+min-height:480px;
+padding:45px 55px;
+position:relative;
+box-shadow:0 20px 70px #0008;
+border-left:7px solid #c6a35c;
+overflow:hidden;
+animation:appear .65s cubic-bezier(.2,.8,.2,1);
+}
+
+.page:after{
+content:"";
+position:absolute;
+right:0;
+top:0;
+width:50px;
+height:100%;
+background:linear-gradient(90deg,transparent,#00000008);
+pointer-events:none;
+}
+
+@keyframes appear{
+0%{opacity:0;transform:rotateY(-12deg) translateX(30px)}
+100%{opacity:1;transform:rotateY(0) translateX(0)}
+}
+
+.page.cover{
+background:linear-gradient(145deg,#164634,#09271f);
+color:#f9edcf;
+border:1px solid #c5a55d;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+}
+
+.cover-content{
+max-width:500px;
+}
+
+.bismillah{
+font-family:'Noto Naskh Arabic',serif;
+font-size:35px;
+color:var(--gold);
+margin-bottom:35px;
+}
+
+.cover h1{
+font-size:43px;
+line-height:1.5;
+margin-bottom:12px;
+}
+
+.cover .subtitle{
+color:#d8c99d;
+font-size:17px;
+}
+
+.ornament{
+font-size:30px;
+color:var(--gold);
+margin:25px 0;
+}
+
+.cover .author-name{
+font-size:18px;
+color:var(--gold);
+margin-top:30px;
+}
+
+.story-number{
+color:#a27d39;
+font-size:12px;
+letter-spacing:2px;
+margin-bottom:15px;
+font-weight:700;
+}
+
+.page h1{
+font-size:30px;
+color:#174734;
+margin-bottom:20px;
+}
+
+.page p{
+font-size:17px;
+line-height:2;
+margin-bottom:16px;
+text-align:justify;
+}
+
+.lesson{
+margin-top:25px;
+padding:15px 20px;
+border-left:3px solid #c6a35c;
+background:#eae3d1;
+border-radius:3px;
+font-size:15px;
+line-height:1.8;
+}
+
+.page-footer{
+position:absolute;
+bottom:17px;
+left:0;
+right:0;
+text-align:center;
+font-size:12px;
+color:#998b6c;
+}
+
+.controls{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:15px;
+margin-top:25px;
+}
+
+.btn{
+border:1px solid #c5a55d;
+background:transparent;
+color:var(--gold);
+padding:12px 25px;
+border-radius:30px;
+font-family:inherit;
+font-size:15px;
+cursor:pointer;
+transition:.3s;
+}
+
+.btn:hover:not(:disabled){
+background:var(--gold);
+color:#102b21;
+transform:translateY(-3px);
+box-shadow:0 7px 20px #d8b66a33;
+}
+
+.btn:disabled{
+opacity:.25;
+cursor:not-allowed;
+}
+
+.counter{
+color:#c8b98f;
+font-size:14px;
+white-space:nowrap;
+}
+
+.dots{
+display:flex;
+justify-content:center;
+gap:7px;
+margin-top:22px;
+flex-wrap:wrap;
+}
+
+.dot{
+width:7px;
+height:7px;
+border-radius:20px;
+background:#ffffff35;
+cursor:pointer;
+transition:.3s;
+}
+
+.dot.active{
+background:var(--gold);
+width:22px;
+}
+
+footer{
+text-align:center;
+padding:35px 15px;
+color:#80978b;
+font-size:13px;
+}
+
+@media(max-width:600px){
+header{padding:0 5%;height:65px}
+.logo{font-size:16px}
+main{padding:30px 13px}
+.page{padding:35px 25px;min-height:510px}
+.page h1{font-size:25px}
+.page p{font-size:15px;line-height:1.9}
+.cover h1{font-size:34px}
+.bismillah{font-size:28px}
+.book{min-height:510px}
+.btn{padding:10px 17px;font-size:13px}
+.counter{font-size:12px}
+}
+</style>
 </head>
 
 <body>
 
-<h1>After All - Manga AI</h1>
+<header>
+<div class="logo">✦ SAHIN BOOKS</div>
+<div class="author">লেখক: Sahin Hujur</div>
+</header>
 
-<textarea id="prompt" placeholder="Enter your manga idea..."></textarea>
-<button onclick="generate()">Generate Story</button>
+<main>
 
-<div id="output">Your story will appear here...</div>
+<div class="top-info">
+<small>ISLAMIC STORY COLLECTION</small>
+<h2>নবীদের কাহিনী</h2>
+</div>
+
+<div class="progress-area">
+<div class="progress" id="progress"></div>
+</div>
+
+<div class="book">
+<div class="page cover" id="page">
+
+<div class="cover-content">
+<div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+
+<div class="ornament">☪ ✧ ☪</div>
+
+<h1>নবীদের<br>কাহিনী</h1>
+
+<p class="subtitle">আল্লাহর প্রেরিত মহান নবীদের জীবনের শিক্ষণীয় গল্প</p>
+
+<div class="ornament">❖ ❖ ❖</div>
+
+<p>১০টি শিক্ষণীয় অধ্যায়</p>
+
+<div class="author-name">লেখক: Sahin Hujur</div>
+</div>
+
+</div>
+</div>
+
+<div class="controls">
+<button class="btn" id="prev" onclick="changePage(-1)" disabled>← আগের পৃষ্ঠা</button>
+<div class="counter" id="counter">Cover</div>
+<button class="btn" id="next" onclick="changePage(1)">পরের পৃষ্ঠা →</button>
+</div>
+
+<div class="dots" id="dots"></div>
+
+</main>
+
+<footer>
+<p>بِسْمِ اللَّهِ</p>
+<p>নবীদের জীবন থেকে শিক্ষা গ্রহণ করি।</p>
+<p style="margin-top:8px">© 2026 Sahin Hujur | All Rights Reserved</p>
+</footer>
 
 <script>
-const API_KEY = "AIzaSyDjL-kWWSE1eQUKjAIjJE1BaZMNR6cIJkk";
 
-let memory = [];
+const stories=[
 
-async function generate() {
-  let userInput = document.getElementById("prompt").value;
+{
+title:"হযরত আদম (আ.)",
+text:[
+"আল্লাহ তাআলা প্রথম মানুষ হযরত আদম (আ.)-কে সৃষ্টি করেন। তিনি ছিলেন প্রথম নবী। আল্লাহ তাঁকে বিশেষ জ্ঞান দান করেন এবং বিভিন্ন জিনিসের নাম শিক্ষা দেন।",
+"আল্লাহ ফেরেশতাদের আদম (আ.)-কে সম্মান জানাতে নির্দেশ দেন। সবাই আল্লাহর আদেশ পালন করলেও ইবলিস অহংকার করে অবাধ্য হয়।",
+"পরবর্তীতে আদম (আ.) ও হাওয়া (আ.) জান্নাতে বসবাস করেন। একটি বিষয়ে নিষেধাজ্ঞা অমান্য করার পর তাঁরা আল্লাহর কাছে ক্ষমা প্রার্থনা করেন। আল্লাহ তাঁদের তওবা কবুল করেন।"
+],
+lesson:"শিক্ষা: অহংকার করা যাবে না। ভুল হলে আন্তরিকভাবে আল্লাহর কাছে ক্ষমা চাইতে হবে।"
+},
 
-  let context = memory.slice(-5).join("\n");
+{
+title:"হযরত নূহ (আ.)",
+text:[
+"হযরত নূহ (আ.) তাঁর জাতিকে দীর্ঘ সময় ধরে এক আল্লাহর ইবাদতের দিকে আহ্বান করেন। কিন্তু তাঁর জাতির অনেক মানুষ তাঁর কথা মানতে অস্বীকার করে।",
+"আল্লাহর নির্দেশে নূহ (আ.) একটি বিশাল নৌকা তৈরি করেন। মানুষ তাঁকে নিয়ে হাসাহাসি করলেও তিনি আল্লাহর আদেশ পালন করতে থাকেন।",
+"অবশেষে মহাপ্লাবন আসে। আল্লাহর নির্দেশে নূহ (আ.) এবং তাঁর সঙ্গে থাকা বিশ্বাসীরা নৌকায় আশ্রয় নেন এবং আল্লাহ তাঁদের রক্ষা করেন।"
+],
+lesson:"শিক্ষা: কঠিন পরিস্থিতিতেও আল্লাহর ওপর বিশ্বাস রাখতে হবে এবং ধৈর্য ধরতে হবে।"
+},
 
-  let fullPrompt = `
-You are "After All", a professional manga writer AI.
+{
+title:"হযরত ইবরাহিম (আ.)",
+text:[
+"হযরত ইবরাহিম (আ.) ছিলেন আল্লাহর একজন মহান নবী। তিনি তাঁর জাতিকে মূর্তিপূজা ছেড়ে এক আল্লাহর ইবাদত করার আহ্বান জানান।",
+"তাঁর জাতি তাঁর বিরোধিতা করে। কিন্তু তিনি সত্যের পথ থেকে সরে যাননি। তাঁকে আগুনে নিক্ষেপ করা হলেও আল্লাহর নির্দেশে আগুন তাঁর জন্য নিরাপদ হয়ে যায়।",
+"ইবরাহিম (আ.) আল্লাহর প্রতি অসাধারণ আনুগত্য ও বিশ্বাসের পরিচয় দেন। তাঁর জীবনের ঘটনা মুসলমানদের জন্য বড় শিক্ষা।"
+],
+lesson:"শিক্ষা: সত্যের পথে অটল থাকতে হবে এবং আল্লাহর ওপর পূর্ণ ভরসা রাখতে হবে।"
+},
 
-Rules:
-- Write like a manga
-- Include dialogues
-- Add emotions
-- Keep scenes cinematic
-- Keep characters consistent
+{
+title:"হযরত ইসমাইল (আ.)",
+text:[
+"হযরত ইসমাইল (আ.) ছিলেন হযরত ইবরাহিম (আ.)-এর পুত্র। তিনি ছোটবেলা থেকেই ধৈর্য ও আল্লাহর প্রতি আনুগত্যের পরিচয় দেন।",
+"আল্লাহর পক্ষ থেকে আসা কঠিন পরীক্ষার সময় ইবরাহিম (আ.) ও ইসমাইল (আ.) উভয়েই আল্লাহর নির্দেশের প্রতি নিজেদের আনুগত্য প্রকাশ করেন।",
+"আল্লাহ তাঁদের আনুগত্য কবুল করেন এবং ইসমাইল (আ.)-এর পরিবর্তে একটি পশু কোরবানির ব্যবস্থা করেন। এই ঘটনা ঈদুল আজহার সঙ্গে সম্পর্কিত।"
+],
+lesson:"শিক্ষা: আল্লাহর প্রতি আনুগত্য এবং বাবা-মায়ের প্রতি সম্মান অত্যন্ত গুরুত্বপূর্ণ।"
+},
 
-Previous context:
-${context}
+{
+title:"হযরত ইউসুফ (আ.)",
+text:[
+"হযরত ইউসুফ (আ.) ছিলেন হযরত ইয়াকুব (আ.)-এর পুত্র। ছোটবেলায় তিনি একটি বিশেষ স্বপ্ন দেখেছিলেন। তাঁর বাবা বুঝতে পারেন যে তাঁর জীবনে বিশেষ কিছু ঘটবে।",
+"তাঁর ভাইয়েরা হিংসার কারণে তাঁকে কূপে ফেলে দেয়। পরে তিনি মিশরে পৌঁছান এবং জীবনে অনেক কঠিন পরীক্ষার মুখোমুখি হন।",
+"আল্লাহ তাঁকে স্বপ্নের ব্যাখ্যা করার জ্ঞান দান করেন। একসময় তিনি মিশরের গুরুত্বপূর্ণ দায়িত্ব লাভ করেন। পরে তাঁর ভাইয়েরা তাঁর কাছে ফিরে এলে তিনি তাদের ক্ষমা করে দেন।"
+],
+lesson:"শিক্ষা: হিংসা থেকে দূরে থাকতে হবে। বিপদেও ধৈর্য ধরতে হবে এবং ক্ষমাশীল হতে হবে।"
+},
 
-User request:
-${userInput}
+{
+title:"হযরত মূসা (আ.)",
+text:[
+"হযরত মূসা (আ.) ছিলেন বনী ইসরাইলের একজন মহান নবী। ফেরাউন নিজেকে অনেক বড় ক্ষমতাধর মনে করত এবং মানুষের ওপর অত্যাচার করত।",
+"আল্লাহ মূসা (আ.)-কে ফেরাউনের কাছে পাঠান। আল্লাহ তাঁকে বিভিন্ন মুজিজা দান করেন এবং সত্যের পথে মানুষকে আহ্বান করার দায়িত্ব দেন।",
+"ফেরাউন ও তার বাহিনী মূসা (আ.)-এর অনুসারীদের পিছু নিলে আল্লাহর নির্দেশে সমুদ্রের পানি দুই ভাগ হয়ে যায়। মূসা (আ.) ও তাঁর অনুসারীরা নিরাপদে পার হয়ে যান।"
+],
+lesson:"শিক্ষা: অন্যায়ের বিরুদ্ধে সত্যের পক্ষে থাকতে হবে। ক্ষমতা কখনো মানুষকে অহংকারী করতে পারে না।"
+},
+
+{
+title:"হযরত দাউদ (আ.)",
+text:[
+"হযরত দাউদ (আ.) ছিলেন আল্লাহর একজন নবী এবং ন্যায়পরায়ণ শাসক। আল্লাহ তাঁকে জ্ঞান, প্রজ্ঞা ও সুন্দর কণ্ঠ দান করেছিলেন।",
+"তিনি মানুষকে ন্যায়বিচার করতে শিক্ষা দিতেন। তাঁর ওপর আল্লাহ যাবুর কিতাব নাজিল করেন।",
+"দাউদ (আ.) নিজের দায়িত্ব যথাযথভাবে পালন করতেন এবং আল্লাহর ইবাদতে মনোযোগী ছিলেন।"
+],
+lesson:"শিক্ষা: ন্যায়বিচার করতে হবে এবং আল্লাহর দেওয়া নিয়ামতের জন্য কৃতজ্ঞ থাকতে হবে।"
+},
+
+{
+title:"হযরত সুলাইমান (আ.)",
+text:[
+"হযরত সুলাইমান (আ.) ছিলেন হযরত দাউদ (আ.)-এর পুত্র এবং একজন মহান নবী। আল্লাহ তাঁকে বিশেষ ক্ষমতা ও অসাধারণ জ্ঞান দান করেছিলেন।",
+"আল্লাহর ইচ্ছায় তিনি পাখি ও বিভিন্ন প্রাণীর কথা বুঝতে পারতেন। তাঁর অধীনে জিনদেরও কাজ করার ক্ষমতা ছিল।",
+"একদিন তিনি একটি পিঁপড়ার কথা শুনে নিজের বাহিনীকে সতর্ক করেন, যেন তারা পিঁপড়াদের ক্ষতি না করে। তিনি সবসময় আল্লাহর কাছে কৃতজ্ঞতা প্রকাশ করতেন।"
+],
+lesson:"শিক্ষা: ক্ষমতা ও সম্পদ পেলে অহংকার করা যাবে না। ছোট প্রাণীর প্রতিও দয়া দেখাতে হবে।"
+},
+
+{
+title:"হযরত ইউনুস (আ.)",
+text:[
+"হযরত ইউনুস (আ.) তাঁর জাতিকে আল্লাহর পথে আহ্বান করতেন। কিন্তু তাঁর জাতির অনেক মানুষ তাঁর কথা গ্রহণ করছিল না।",
+"একসময় তিনি নিজের জাতি ছেড়ে চলে যান এবং একটি জাহাজে ওঠেন। পরে আল্লাহর ইচ্ছায় তিনি সমুদ্রে একটি বড় মাছের পেটে অবস্থান করেন।",
+"সেখানে তিনি আল্লাহর কাছে দোয়া করেন। আল্লাহ তাঁর দোয়া কবুল করেন এবং তাঁকে উদ্ধার করেন। এরপর তিনি আবার নিজের জাতির কাছে ফিরে যান।"
+],
+lesson:"শিক্ষা: বিপদে কখনো আল্লাহর রহমত থেকে নিরাশ হওয়া যাবে না। সবসময় দোয়া করতে হবে।"
+},
+
+{
+title:"হযরত মুহাম্মদ ﷺ",
+text:[
+"হযরত মুহাম্মদ ﷺ হলেন সর্বশেষ নবী ও রাসুল। তিনি মক্কায় জন্মগ্রহণ করেন। ছোটবেলা থেকেই তিনি সত্যবাদী ও বিশ্বস্ত হিসেবে পরিচিত ছিলেন।",
+"চল্লিশ বছর বয়সে হেরা গুহায় তাঁর ওপর প্রথম ওহি নাজিল হয়। এরপর তিনি মানুষকে এক আল্লাহর ইবাদত, ন্যায়বিচার, দয়া ও উত্তম চরিত্রের শিক্ষা দিতে শুরু করেন।",
+"অনেক বাধা ও কষ্টের মধ্যেও তিনি ইসলামের দাওয়াত চালিয়ে যান। পরে তিনি মদিনায় হিজরত করেন। তাঁর জীবন সমগ্র মানবজাতির জন্য উত্তম আদর্শ।",
+"তিনি আমাদের শিখিয়েছেন সত্য কথা বলতে, অসহায় মানুষের পাশে দাঁড়াতে, ক্ষমা করতে এবং সবার সঙ্গে সুন্দর আচরণ করতে।"
+],
+lesson:"শিক্ষা: রাসুলুল্লাহ ﷺ-এর সুন্নাহ অনুসরণ করতে হবে এবং সুন্দর চরিত্র গঠন করতে হবে।"
+}
+
+];
+
+let current= -1;
+
+const page=document.getElementById("page");
+const prev=document.getElementById("prev");
+const next=document.getElementById("next");
+const counter=document.getElementById("counter");
+const progress=document.getElementById("progress");
+const dots=document.getElementById("dots");
+
+function renderDots(){
+dots.innerHTML="";
+for(let i=-1;i<stories.length;i++){
+let d=document.createElement("div");
+d.className="dot "+(current===i?"active":"");
+d.onclick=()=>goTo(i);
+dots.appendChild(d);
+}
+}
+
+function render(){
+
+page.style.animation="none";
+void page.offsetWidth;
+page.style.animation="appear .65s cubic-bezier(.2,.8,.2,1)";
+
+if(current===-1){
+
+page.className="page cover";
+page.innerHTML=`
+<div class="cover-content">
+<div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+<div class="ornament">☪ ✧ ☪</div>
+<h1>নবীদের<br>কাহিনী</h1>
+<p class="subtitle">আল্লাহর প্রেরিত মহান নবীদের জীবনের শিক্ষণীয় গল্প</p>
+<div class="ornament">❖ ❖ ❖</div>
+<p>১০টি শিক্ষণীয় অধ্যায়</p>
+<div class="author-name">লেখক: Sahin Hujur</div>
+</div>`;
+
+counter.innerText="Cover";
+
+}else{
+
+let s=stories[current];
+
+page.className="page";
+page.innerHTML=`
+<div class="story-number">CHAPTER ${String(current+1).padStart(2,"0")} / 10</div>
+<h1>${s.title}</h1>
+${s.text.map(t=>`<p>${t}</p>`).join("")}
+<div class="lesson">✦ <b>শিক্ষণীয় বিষয়</b><br>${s.lesson}</div>
+<div class="page-footer">নবীদের কাহিনী • ${current+1}</div>
 `;
 
-  let response = await fetch(
-    "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + API_KEY,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        contents: [{
-          parts: [{ text: fullPrompt }]
-        }]
-      })
-    }
-  );
-
-  let data = await response.json();
-
-  let output = data.candidates?.[0]?.content?.parts?.[0]?.text || "Error generating story";
-
-  memory.push(userInput);
-  memory.push(output);
-
-  document.getElementById("output").innerText = output;
+counter.innerText=`${current+1} / 10`;
 }
-</script>
 
+prev.disabled=current===-1;
+next.disabled=current===stories.length-1;
+
+progress.style.width=((current+1)/stories.length)*100+"%";
+
+renderDots();
+}
+
+function goTo(n){
+if(n<-1||n>=stories.length)return;
+current=n;
+render();
+window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function changePage(dir){
+goTo(current+dir);
+}
+
+document.addEventListener("keydown",e=>{
+if(e.key==="ArrowRight")changePage(1);
+if(e.key==="ArrowLeft")changePage(-1);
+});
+
+render();
+
+</script>
 </body>
 </html>
