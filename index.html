@@ -1,1456 +1,388 @@
-
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#09291f">
-<title>Hazrat Sah Natwan Madrasha</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@500;600;700&display=swap" rel="stylesheet">
-
+<meta name="theme-color" content="#070b19">
+<title>ORBIT // Personal Command Center</title>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap');
 :root{
- --bg:#081e18;
- --bg2:#0d3025;
- --green:#164a37;
- --gold:#d6b66e;
- --gold2:#f0d99c;
- --white:#f8f5ec;
- --muted:#a9b9ae;
- --card:#103529;
- --line:#ffffff16;
- --paper:#f6f0e2;
- --ink:#26392e;
+ --bg:#070b19;--panel:#10172a;--panel2:#141e35;--line:#263451;
+ --text:#eaf2ff;--muted:#91a0bc;--cyan:#63e6ff;--blue:#7796ff;
+ --violet:#b08cff;--green:#63e6b0;--amber:#ffc878;--red:#ff7e98;
+ --radius:18px;--shadow:0 18px 55px #0006;
 }
-
-*{box-sizing:border-box;margin:0;padding:0}
-
+*{box-sizing:border-box}
 html{scroll-behavior:smooth}
-
-body{
- background:var(--bg);
- color:var(--white);
- font-family:'Hind Siliguri',sans-serif;
- overflow-x:hidden;
-}
-
-button{font-family:inherit}
-a{text-decoration:none;color:inherit}
-section{scroll-margin-top:90px}
-
-::selection{background:var(--gold);color:var(--bg)}
-
-.container{
- width:min(1120px,92%);
- margin:auto;
-}
-
-.gold{color:var(--gold)}
-.muted{color:var(--muted)}
-
-.section-title{
- font-size:32px;
- margin-bottom:10px;
- line-height:1.5;
-}
-
-.section-sub{
- color:var(--muted);
- line-height:1.8;
- margin-bottom:32px;
-}
-
-/* INTRO */
-
-#intro{
- position:fixed;
- inset:0;
- z-index:1000;
- background:
- radial-gradient(ellipse at center,#194d39 0%,#0b291f 50%,#061710 100%);
- display:flex;
- align-items:center;
- justify-content:center;
- text-align:center;
- padding:25px;
- transition:opacity 1s,visibility 1s;
-}
-
-#intro.hide{
- opacity:0;
- visibility:hidden;
- pointer-events:none;
-}
-
-.intro-content{
- max-width:650px;
- animation:introUp 1.2s ease both;
-}
-
-.intro-symbol{
- width:95px;
- height:95px;
- margin:0 auto 28px;
- border:1px solid var(--gold);
- border-radius:50%;
- display:grid;
- place-items:center;
- color:var(--gold);
- font-size:43px;
- animation:rotateIn 1.5s ease;
- box-shadow:0 0 50px #d6b66e20;
-}
-
-.intro-small{
- color:var(--gold);
- letter-spacing:4px;
- font-size:11px;
- margin-bottom:15px;
-}
-
-.intro-content h1{
- font-size:clamp(30px,7vw,55px);
- line-height:1.5;
- font-weight:700;
-}
-
-.intro-line{
- width:100px;
- height:1px;
- background:var(--gold);
- margin:24px auto;
- animation:lineGrow 1.5s ease both;
-}
-
-.intro-content p{
- color:#c0cfc4;
- font-size:16px;
- line-height:1.9;
-}
-
-.intro-buttons{
- display:flex;
- justify-content:center;
- align-items:center;
- gap:15px;
- margin-top:35px;
-}
-
-.gold-btn{
- background:var(--gold);
- color:#102b20;
- border:1px solid var(--gold);
- padding:13px 25px;
- border-radius:5px;
- cursor:pointer;
- font-size:15px;
- font-weight:700;
- transition:.3s;
-}
-
-.gold-btn:hover{
- background:var(--gold2);
- transform:translateY(-3px);
- box-shadow:0 8px 25px #d6b66e25;
-}
-
-.skip-btn{
- color:var(--gold);
- background:transparent;
- border:1px solid #d6b66e55;
- padding:12px 22px;
- border-radius:5px;
- cursor:pointer;
-}
-
-@keyframes introUp{
- from{opacity:0;transform:translateY(35px)}
- to{opacity:1;transform:translateY(0)}
-}
-
-@keyframes rotateIn{
- from{opacity:0;transform:rotate(-90deg) scale(.5)}
- to{opacity:1;transform:rotate(0) scale(1)}
-}
-
-@keyframes lineGrow{
- from{width:0}
- to{width:100px}
-}
-
-/* HEADER */
-
-header{
- position:sticky;
- top:0;
- z-index:100;
- background:#081e18ed;
- backdrop-filter:blur(15px);
- border-bottom:1px solid var(--line);
-}
-
-.navbar{
- height:76px;
- display:flex;
- align-items:center;
- justify-content:space-between;
- gap:20px;
-}
-
-.brand{
- display:flex;
- align-items:center;
- gap:12px;
-}
-
-.brand-icon{
- width:42px;
- height:42px;
- border:1px solid var(--gold);
- border-radius:50%;
- display:grid;
- place-items:center;
- color:var(--gold);
- font-size:20px;
-}
-
-.brand-text strong{
- display:block;
- font-size:15px;
- color:var(--gold);
-}
-
-.brand-text span{
- display:block;
- font-size:10px;
- color:var(--muted);
-}
-
-.nav-links{
- display:flex;
- align-items:center;
- gap:25px;
-}
-
-.nav-links a{
- font-size:14px;
- color:#c7d2ca;
- transition:.3s;
-}
-
-.nav-links a:hover{color:var(--gold)}
-
-.menu-btn{
- display:none;
- background:none;
- border:1px solid var(--line);
- color:var(--gold);
- padding:8px 12px;
- border-radius:5px;
- font-size:20px;
- cursor:pointer;
-}
-
-/* HERO */
-
-.hero{
- min-height:600px;
- display:flex;
- align-items:center;
- position:relative;
- overflow:hidden;
- background:
- linear-gradient(90deg,#081e18 10%,#081e18e8 55%,#081e1870),
- url('https://images.unsplash.com/photo-1609599006353-e629aaabfeae?auto=format&fit=crop&w=1800&q=85');
- background-size:cover;
- background-position:center;
-}
-
-.hero:after{
- content:"";
- position:absolute;
- bottom:0;
- left:0;
- right:0;
- height:120px;
- background:linear-gradient(transparent,var(--bg));
-}
-
-.hero-content{
- position:relative;
- z-index:2;
- max-width:680px;
- padding:90px 0 120px;
- animation:introUp 1s ease both;
-}
-
-.eyebrow{
- color:var(--gold);
- letter-spacing:3px;
- font-size:12px;
- margin-bottom:20px;
-}
-
-.hero h1{
- font-size:clamp(36px,6vw,65px);
- line-height:1.4;
- margin-bottom:20px;
-}
-
-.hero p{
- color:#c2d0c5;
- font-size:17px;
- line-height:2;
- max-width:580px;
-}
-
-.hero-buttons{
- display:flex;
- gap:13px;
- flex-wrap:wrap;
- margin-top:32px;
-}
-
-.outline-btn{
- border:1px solid var(--gold);
- background:transparent;
- color:var(--gold);
- padding:13px 24px;
- border-radius:5px;
- cursor:pointer;
- transition:.3s;
-}
-
-.outline-btn:hover{
- background:#d6b66e15;
- transform:translateY(-3px);
-}
-
-.hero-bottom{
- position:absolute;
- bottom:25px;
- left:0;
- right:0;
- z-index:3;
- display:flex;
- justify-content:space-between;
- color:#a9b9ae;
- font-size:12px;
-}
-
-/* GENERAL SECTIONS */
-
-.section{
- padding:90px 0;
-}
-
-.section-heading{
- margin-bottom:35px;
-}
-
-.heading-line{
- width:55px;
- height:2px;
- background:var(--gold);
- margin-top:15px;
-}
-
-.about-grid{
- display:grid;
- grid-template-columns:1.1fr .9fr;
- gap:45px;
- align-items:center;
-}
-
-.about-text p{
- color:#c2cec5;
- font-size:16px;
- line-height:2.1;
- margin-bottom:17px;
-}
-
-.about-visual{
- min-height:340px;
- border:1px solid #d6b66e55;
- background:
- linear-gradient(#0b281e66,#0b281eaa),
- url('https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&w=1000&q=85') center/cover;
- border-radius:8px;
- display:flex;
- align-items:flex-end;
- padding:25px;
-}
-
-.about-visual div{
- background:#071e18df;
- padding:20px;
- width:100%;
- border-left:3px solid var(--gold);
-}
-
-.about-visual strong{
- display:block;
- color:var(--gold);
- font-size:19px;
-}
-
-.about-visual span{
- color:#c0cec3;
- font-size:13px;
-}
-
-/* CARDS */
-
-.cards{
- display:grid;
- grid-template-columns:repeat(3,1fr);
- gap:20px;
-}
-
-.card{
- background:linear-gradient(145deg,#123d2e,#0d2a21);
- border:1px solid var(--line);
- padding:27px;
- border-radius:8px;
- transition:.35s;
-}
-
-.card:hover{
- transform:translateY(-7px);
- border-color:#d6b66e66;
- box-shadow:0 15px 35px #0003;
-}
-
-.card-icon{
- font-size:28px;
- margin-bottom:18px;
-}
-
-.card h3{
- color:var(--gold2);
- font-size:20px;
- margin-bottom:10px;
-}
-
-.card p{
- color:#b8c8bd;
- line-height:1.9;
- font-size:14px;
-}
-
-.teacher-role{
- color:var(--gold);
- font-size:12px;
- margin-bottom:10px;
- letter-spacing:1px;
-}
-
-/* NOTICE */
-
-.notice-box{
- border:1px solid #d6b66e44;
- background:linear-gradient(110deg,#143b2d,#0b281f);
- border-radius:8px;
- padding:30px;
- display:flex;
- align-items:center;
- gap:25px;
-}
-
-.notice-icon{
- font-size:35px;
- color:var(--gold);
-}
-
-.notice-box h3{
- color:var(--gold2);
- margin-bottom:8px;
-}
-
-.notice-box p{
- color:#b8c8bd;
- line-height:1.8;
-}
-
-/* BOOK */
-
-.library-section{
- background:#0d2a21;
- border-top:1px solid var(--line);
- border-bottom:1px solid var(--line);
-}
-
-.book-grid{
- display:grid;
- grid-template-columns:350px 1fr;
- gap:45px;
- align-items:center;
-}
-
-.book-cover{
- min-height:460px;
- border:1px solid var(--gold);
- border-radius:5px;
- background:
- linear-gradient(145deg,#164b37,#08251b);
- padding:30px;
- display:flex;
- align-items:center;
- justify-content:center;
- text-align:center;
- box-shadow:15px 15px 0 #d6b66e15,0 25px 50px #0004;
- position:relative;
- overflow:hidden;
-}
-
-.book-cover:before{
- content:"";
- position:absolute;
- inset:12px;
- border:1px solid #d6b66e55;
- pointer-events:none;
-}
-
-.book-cover-content{position:relative;z-index:2}
-
-.arabic{
- font-family:'Noto Naskh Arabic',serif;
- font-size:25px;
- color:var(--gold);
- margin-bottom:35px;
-}
-
-.book-cover h2{
- font-size:36px;
- line-height:1.6;
- color:#fff1d1;
-}
-
-.book-cover .ornament{
- color:var(--gold);
- font-size:28px;
- margin:25px 0;
-}
-
-.book-cover p{
- color:#d8c79d;
-}
-
-.book-details h2{
- font-size:32px;
- margin-bottom:12px;
-}
-
-.book-details>p{
- color:#b8c8bd;
- line-height:2;
- margin-bottom:20px;
-}
-
-.book-meta{
- display:flex;
- gap:20px;
- flex-wrap:wrap;
- color:var(--gold);
- font-size:13px;
- margin:20px 0 30px;
-}
-
-.book-details .gold-btn{margin-right:10px}
-
-/* READER */
-
-#reader{
- display:none;
- background:var(--bg);
- padding:80px 0;
-}
-
-#reader.open{display:block}
-
-.reader-top{
- display:flex;
- align-items:center;
- justify-content:space-between;
- gap:15px;
- flex-wrap:wrap;
- margin-bottom:25px;
-}
-
-.reader-top h2{font-size:25px}
-
-.reader-tools{
- display:flex;
- gap:8px;
- flex-wrap:wrap;
-}
-
-.tool-btn{
- background:#143b2d;
- color:var(--gold);
- border:1px solid #d6b66e44;
- padding:9px 13px;
- border-radius:5px;
- cursor:pointer;
-}
-
-.read-progress{
- height:4px;
- background:#ffffff18;
- border-radius:5px;
- margin-bottom:25px;
- overflow:hidden;
-}
-
-.read-progress div{
- height:100%;
- background:var(--gold);
- width:0;
- transition:.4s;
-}
-
-.reader-layout{
- display:grid;
- grid-template-columns:245px 1fr;
- gap:25px;
- align-items:start;
-}
-
-.chapter-list{
- background:#103328;
- border:1px solid var(--line);
- border-radius:7px;
- padding:18px;
- position:sticky;
- top:100px;
-}
-
-.chapter-list h3{
- color:var(--gold);
- font-size:17px;
- margin-bottom:15px;
-}
-
-.chapter-item{
- width:100%;
- display:block;
- text-align:left;
- padding:11px 12px;
- background:transparent;
- color:#c0cec4;
- border:0;
- border-radius:4px;
- margin-bottom:5px;
- cursor:pointer;
- font-family:inherit;
- font-size:13px;
- transition:.2s;
-}
-
-.chapter-item:hover,.chapter-item.active{
- background:#d6b66e19;
- color:var(--gold);
-}
-
-.paper{
- background:var(--paper);
- color:var(--ink);
- min-height:650px;
- padding:55px clamp(22px,6vw,65px);
- border-radius:5px;
- box-shadow:0 20px 50px #0003;
- position:relative;
-}
-
-.paper-label{
- color:#9c7938;
- font-size:11px;
- letter-spacing:2px;
- margin-bottom:18px;
- font-weight:700;
-}
-
-.paper h2{
- font-size:30px;
- color:#174733;
- margin-bottom:28px;
- line-height:1.6;
-}
-
-.paper p{
- font-size:17px;
- line-height:2.2;
- margin-bottom:19px;
- text-align:justify;
-}
-
-.paper .arabic{
- text-align:center;
- color:#8a692c;
- font-size:27px;
- margin:25px 0;
-}
-
-.paper .lesson{
- padding:18px;
- background:#e9e0cc;
- border-left:3px solid #b28d43;
- margin-top:30px;
- line-height:2;
-}
-
-.paper-footer{
- margin-top:55px;
- padding-top:15px;
- border-top:1px solid #d7cbb0;
- display:flex;
- justify-content:space-between;
- color:#978a6d;
- font-size:12px;
-}
-
-.reader-navigation{
- display:flex;
- justify-content:space-between;
- gap:10px;
- margin-top:20px;
-}
-
-.reader-navigation button:disabled{
- opacity:.3;
- cursor:not-allowed;
-}
-
-.bookmark-status{
- color:var(--gold);
- font-size:12px;
-}
-
-/* FOOTER */
-
-footer{
- border-top:1px solid var(--line);
- padding:50px 0 25px;
- background:#061710;
-}
-
-.footer-grid{
- display:grid;
- grid-template-columns:2fr 1fr 1fr;
- gap:40px;
- margin-bottom:40px;
-}
-
-.footer-grid h3{
- color:var(--gold);
- margin-bottom:15px;
-}
-
-.footer-grid p,.footer-grid a{
- color:#9eb1a4;
- font-size:14px;
- line-height:2;
- display:block;
-}
-
-.copyright{
- border-top:1px solid var(--line);
- padding-top:20px;
- text-align:center;
- color:#748b7e;
- font-size:12px;
-}
-
-/* REVEAL */
-
-.reveal{
- opacity:0;
- transform:translateY(25px);
- transition:opacity .8s ease,transform .8s ease;
-}
-
-.reveal.visible{
- opacity:1;
- transform:translateY(0);
-}
-
-/* RESPONSIVE */
-
-@media(max-width:850px){
- .nav-links{
- display:none;
- position:absolute;
- top:76px;
- left:0;
- right:0;
- background:#0a241b;
- padding:20px 5%;
- border-bottom:1px solid var(--line);
- flex-direction:column;
- align-items:flex-start;
- gap:18px;
- }
- .nav-links.show{display:flex}
- .menu-btn{display:block}
- .about-grid{grid-template-columns:1fr}
- .book-grid{grid-template-columns:1fr}
- .book-cover{max-width:350px;width:100%;margin:auto}
- .reader-layout{grid-template-columns:1fr}
- .chapter-list{position:relative;top:0}
- .chapter-list-inner{
- display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:4px;
- }
- .cards{grid-template-columns:repeat(2,1fr)}
-}
-
-@media(max-width:550px){
- .navbar{height:68px}
- .brand-text strong{font-size:12px}
- .brand-text span{font-size:9px}
- .brand-icon{width:37px;height:37px}
- .hero{min-height:550px}
- .hero-content{padding:75px 0 100px}
- .hero p{font-size:15px}
- .section{padding:65px 0}
- .section-title{font-size:26px}
- .cards{grid-template-columns:1fr}
- .notice-box{align-items:flex-start;padding:20px;gap:15px}
- .book-cover{min-height:400px}
- .book-cover h2{font-size:30px}
- .reader-top h2{font-size:20px}
- .paper{padding:35px 23px;min-height:550px}
- .paper h2{font-size:24px}
- .paper p{font-size:15px;line-height:2}
- .chapter-list-inner{grid-template-columns:1fr}
- .footer-grid{grid-template-columns:1fr;gap:25px}
- .hero-bottom{font-size:10px}
-}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Manrope,system-ui,sans-serif;min-height:100vh;overflow-x:hidden}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+#space{position:fixed;inset:0;z-index:-3;overflow:hidden;background:radial-gradient(ellipse at 75% 8%,#182b55 0,transparent 35%),radial-gradient(ellipse at 12% 75%,#211641 0,transparent 35%),#070b19}
+#space:before,#space:after{content:"";position:absolute;inset:-50%;background-image:radial-gradient(1px 1px at 25px 35px,#fff 98%,transparent),radial-gradient(1px 1px at 95px 115px,#b9d8ff 98%,transparent),radial-gradient(2px 2px at 175px 65px,#fff 98%,transparent),radial-gradient(1px 1px at 225px 185px,#fff 98%,transparent);background-size:260px 220px;opacity:.48;animation:starDrift 100s linear infinite}
+#space:after{background-size:390px 310px;opacity:.25;animation-duration:150s;animation-direction:reverse}
+@keyframes starDrift{to{transform:translate3d(100px,80px,0)}}
+.planet{position:fixed;z-index:-2;width:340px;height:340px;border-radius:50%;right:-155px;top:150px;background:radial-gradient(circle at 30% 28%,#a4c6ff 0,#5166a7 17%,#252b59 43%,#10152e 70%);box-shadow:inset -35px -25px 55px #050817,0 0 90px #5366bb22;opacity:.35;animation:planetFloat 18s ease-in-out infinite}
+.planet:after{content:"";position:absolute;width:470px;height:100px;border:2px solid #a6c8ff55;border-radius:50%;left:-65px;top:115px;transform:rotate(-22deg);box-shadow:0 0 20px #7baaff22}
+@keyframes planetFloat{50%{transform:translateY(25px) rotate(8deg)}}
+.app{display:grid;grid-template-columns:250px minmax(0,1fr);min-height:100vh}
+.sidebar{position:fixed;inset:0 auto 0 0;width:250px;padding:25px 17px;background:#080e20d9;backdrop-filter:blur(22px);border-right:1px solid #ffffff12;z-index:20;display:flex;flex-direction:column}
+.brand{display:flex;align-items:center;gap:11px;padding:4px 8px 27px}
+.brand-mark{width:39px;height:39px;border-radius:13px;background:linear-gradient(135deg,var(--cyan),var(--violet));display:grid;place-items:center;color:#07101e;font-size:20px;font-weight:900;box-shadow:0 0 25px #63e6ff35}
+.brand strong{display:block;font-size:13px;letter-spacing:2px}
+.brand small{display:block;color:var(--muted);font:10px 'DM Mono';letter-spacing:1.5px;margin-top:4px}
+.nav-label{font:10px 'DM Mono';letter-spacing:2px;color:#647493;padding:17px 11px 9px}
+.nav{display:grid;gap:5px}
+.nav button{border:0;background:transparent;color:#a9b6d0;text-align:left;padding:11px 12px;border-radius:11px;display:flex;align-items:center;gap:12px;font-size:13px;transition:background .2s,color .2s,transform .2s}
+.nav button:hover{background:#ffffff0c;color:white;transform:translateX(3px)}
+.nav button.active{background:linear-gradient(100deg,#284a72aa,#39305c88);color:white;box-shadow:inset 2px 0 var(--cyan)}
+.nav .ico{width:20px;text-align:center;font-size:16px}
+.side-bottom{margin-top:auto;border:1px solid #ffffff12;border-radius:14px;padding:13px;background:#ffffff07}
+.side-bottom small{font:10px 'DM Mono';color:var(--muted);letter-spacing:1px}
+.side-bottom p{font-size:12px;line-height:1.6;color:#c5d1e8;margin:7px 0 0}
+.main{grid-column:2;min-width:0;padding:25px clamp(18px,3vw,42px) 55px;max-width:1600px;width:100%;margin:auto}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:28px}
+.crumb{font:11px 'DM Mono';letter-spacing:1.5px;color:var(--muted)}
+.crumb b{color:var(--cyan);font-weight:500}
+.top-actions{display:flex;align-items:center;gap:10px}
+.status{display:flex;align-items:center;gap:8px;border:1px solid #ffffff15;border-radius:30px;padding:8px 12px;color:#b5c4df;font:10px 'DM Mono'}
+.pulse{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green);animation:pulse 2s infinite}
+@keyframes pulse{50%{opacity:.35;box-shadow:0 0 3px var(--green)}}
+.mobile-menu{display:none;border:1px solid var(--line);background:#10172a;color:white;border-radius:10px;padding:9px 12px}
+.view{display:none;animation:viewIn .45s cubic-bezier(.16,1,.3,1)}
+.view.active{display:block}
+@keyframes viewIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.hero{position:relative;overflow:hidden;border:1px solid #ffffff18;border-radius:24px;padding:clamp(25px,4vw,48px);min-height:265px;background:linear-gradient(105deg,#101c37f2 0%,#111a30dd 52%,#1c2450aa 100%),url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1500&q=85') center/cover;box-shadow:var(--shadow)}
+.hero:after{content:"";position:absolute;width:250px;height:250px;border:1px solid #b6d7ff35;border-radius:50%;right:9%;top:5%;box-shadow:0 0 0 25px #a9caff08,0 0 0 55px #a9caff06;animation:orbit 30s linear infinite}
+@keyframes orbit{to{transform:rotate(360deg)}}
+.hero-content{position:relative;z-index:1;max-width:660px}
+.kicker{font:10px 'DM Mono';letter-spacing:2.5px;color:var(--cyan);text-transform:uppercase}
+h1{font-size:clamp(29px,4vw,48px);line-height:1.12;letter-spacing:-1.7px;margin:15px 0 12px}
+.hero p{max-width:540px;color:#b5c4df;line-height:1.8;font-size:13px}
+.hero-buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:23px}
+.btn{border:1px solid transparent;border-radius:10px;padding:11px 15px;font-size:12px;font-weight:800;transition:transform .2s,filter .2s,background .2s}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.12)}
+.primary{background:linear-gradient(110deg,var(--cyan),#8da6ff);color:#07101e}
+.secondary{background:#ffffff0a;border-color:#ffffff24;color:#eaf2ff}
+.danger{background:#ff7e9818;border-color:#ff7e9844;color:#ff9bae}
+.grid{display:grid;gap:15px}
+.stats{grid-template-columns:repeat(4,minmax(0,1fr));margin:18px 0 25px}
+.stat,.panel,.tool-card,.project-card{background:linear-gradient(145deg,#121c32ed,#0c1427ed);border:1px solid #ffffff13;border-radius:var(--radius);box-shadow:0 10px 35px #0002}
+.stat{padding:17px 18px;position:relative;overflow:hidden}
+.stat:after{content:"";position:absolute;width:65px;height:65px;border-radius:50%;right:-25px;top:-25px;background:var(--glow,#63e6ff);filter:blur(35px);opacity:.24}
+.stat-label{font:10px 'DM Mono';letter-spacing:1px;color:var(--muted)}
+.stat-value{font-size:27px;font-weight:800;margin-top:8px}
+.stat-note{font-size:10px;color:#8393b1;margin-top:3px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;margin:28px 0 14px}
+.section-head h2{font-size:17px;letter-spacing:-.3px}
+.section-head p{font-size:11px;color:var(--muted);margin-top:5px}
+.text-btn{border:0;background:none;color:var(--cyan);font-size:11px;font-weight:700}
+.quick-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.tool-card{padding:17px;cursor:pointer;transition:transform .25s,border-color .25s,background .25s;min-height:130px}
+.tool-card:hover{transform:translateY(-5px);border-color:#63e6ff66;background:linear-gradient(145deg,#182b49,#10172a)}
+.tool-icon{width:37px;height:37px;border-radius:12px;display:grid;place-items:center;background:#63e6ff15;color:var(--cyan);font-size:18px;margin-bottom:14px}
+.tool-card h3{font-size:12px;margin:0 0 6px}
+.tool-card p{font-size:10px;color:var(--muted);line-height:1.6;margin:0}
+.lower-grid{grid-template-columns:1.3fr .7fr;margin-top:18px}
+.panel{padding:19px}
+.panel-title{font-size:13px;font-weight:800;margin-bottom:15px}
+.projects{display:grid;gap:10px}
+.project-row{display:flex;align-items:center;gap:12px;padding:11px;border-radius:12px;background:#ffffff06;border:1px solid #ffffff0b}
+.project-orb{width:36px;height:36px;border-radius:12px;display:grid;place-items:center;background:#8b9cff18;font-size:17px;flex:none}
+.project-row strong{display:block;font-size:11px}
+.project-row small{display:block;color:var(--muted);font-size:10px;margin-top:4px}
+.tag{margin-left:auto;border:1px solid #63e6b044;color:var(--green);padding:4px 7px;border-radius:20px;font:9px 'DM Mono';white-space:nowrap}
+.activity{display:grid;gap:13px}
+.activity-item{display:flex;gap:10px;color:#aab8d0;font-size:11px;line-height:1.6}
+.activity-dot{width:7px;height:7px;border-radius:50%;background:var(--violet);margin-top:5px;flex:none}
+.page-title{font-size:27px;margin:4px 0 7px}
+.page-desc{font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:23px}
+.tool-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,.85fr);gap:15px;align-items:start}
+.form-panel{padding:20px;background:#10182ced;border:1px solid #ffffff15;border-radius:17px}
+.form-panel h3{font-size:13px;margin:0 0 16px}
+.field{display:grid;gap:7px;margin-bottom:14px}
+.field label{font:10px 'DM Mono';letter-spacing:.8px;color:#aab9d4}
+.field input,.field textarea,.field select,.input{width:100%;border:1px solid #ffffff1a;background:#090f20;color:#edf4ff;border-radius:10px;padding:11px 12px;font-size:12px;min-width:0}
+.field textarea{min-height:105px;resize:vertical;line-height:1.7}
+.field select option{background:#10172a}
+.row-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.output{background:#080e1e;border:1px solid #ffffff16;border-radius:12px;padding:15px;min-height:120px;color:#c7d8f4;font:11px/1.8 'DM Mono';white-space:pre-wrap;overflow-wrap:anywhere}
+.output.empty{color:#7384a4;font-family:Manrope}
+.output-head{display:flex;justify-content:space-between;align-items:center;margin:0 0 10px}
+.output-head strong{font-size:12px}
+.hint{font-size:10px;color:#8292b1;line-height:1.7;margin-top:10px}
+.action-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
+.check-list{display:grid;gap:9px}
+.check-item{display:flex;gap:10px;align-items:flex-start;background:#ffffff06;border:1px solid #ffffff0d;padding:10px;border-radius:10px;font-size:11px;color:#c1cde1}
+.check-item input{accent-color:var(--cyan);margin-top:2px}
+.task-list{display:grid;gap:8px;margin-top:15px}
+.task{display:flex;align-items:center;gap:10px;padding:10px;background:#ffffff07;border:1px solid #ffffff10;border-radius:10px;font-size:11px}
+.task.done span{text-decoration:line-through;color:#70809c}
+.task span{flex:1}
+.task button{border:0;background:none;color:#ff8fa6}
+.lesson-card{padding:14px;border:1px solid #ffffff12;border-radius:12px;background:#ffffff06;margin-bottom:9px}
+.lesson-card h4{font-size:12px;margin:0 0 5px}
+.lesson-card p{font-size:10px;color:var(--muted);line-height:1.6;margin:0 0 10px}
+.lesson-card.done{border-color:#63e6b055}
+.quiz-option{display:block;width:100%;text-align:left;background:#ffffff08;color:#d9e5f8;border:1px solid #ffffff17;border-radius:10px;padding:11px;margin:7px 0;font-size:11px}
+.quiz-option:hover{border-color:var(--cyan)}
+.feedback{font-size:11px;margin-top:10px;min-height:18px;color:var(--green)}
+.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#182b45;border:1px solid #63e6ff66;color:white;padding:11px 16px;border-radius:12px;font-size:11px;z-index:99;transition:.25s;box-shadow:var(--shadow)}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.mobile-overlay{display:none}
+.small-muted{font-size:10px;color:var(--muted);line-height:1.7}
+@media(max-width:1050px){.quick-grid{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){
+ .app{display:block}.sidebar{transform:translateX(-105%);transition:transform .3s;width:270px;box-shadow:var(--shadow)}.sidebar.open{transform:translateX(0)}
+ .mobile-overlay.show{display:block;position:fixed;inset:0;background:#020611aa;z-index:19}
+ .main{padding:18px 14px 45px}.mobile-menu{display:block}.topbar{margin-bottom:18px}
+ .status{font-size:9px}.hero{min-height:300px}.hero:after{right:-100px;top:25%}
+ .lower-grid,.tool-layout{grid-template-columns:1fr}.stats{gap:9px}.stat{padding:13px}.stat-value{font-size:23px}
+}
+@media(max-width:430px){.quick-grid{grid-template-columns:1fr 1fr;gap:9px}.tool-card{padding:13px;min-height:125px}.row-fields{grid-template-columns:1fr}.hero{padding:24px}.hero h1{font-size:31px}.crumb{font-size:9px}.status{padding:7px 8px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
 </head>
-
 <body>
+<div id="space"></div><div class="planet"></div>
+<div class="mobile-overlay" id="overlay" onclick="closeSidebar()"></div>
+<div class="app">
+<aside class="sidebar" id="sidebar">
+ <div class="brand"><div class="brand-mark">✦</div><div><strong>ORBIT COMMAND</strong><small>PERSONAL WORKSPACE</small></div></div>
+ <div class="nav-label">COMMAND DECK</div>
+ <nav class="nav">
+  <button class="active" data-view="home"><span class="ico">⌂</span>Overview</button>
+  <button data-view="luau"><span class="ico">⌘</span>Luau Builder</button>
+  <button data-view="planner"><span class="ico">◈</span>Game Planner</button>
+  <button data-view="economy"><span class="ico">◉</span>Economy Lab</button>
+  <button data-view="prompts"><span class="ico">✧</span>Prompt Lab</button>
+  <button data-view="shorts"><span class="ico">▷</span>Shorts Studio</button>
+  <button data-view="website"><span class="ico">⌘</span>Website Lab</button>
+  <button data-view="code"><span class="ico">〈/〉</span>Code Toolkit</button>
+  <button data-view="study"><span class="ico">▤</span>Study Hub</button>
+ </nav>
+ <div class="nav-label">WORKSPACE</div>
+ <nav class="nav">
+  <button data-view="projects"><span class="ico">▦</span>My Projects</button>
+  <button data-view="tasks"><span class="ico">✓</span>Task Board</button>
+ </nav>
+ <div class="side-bottom"><small>LOCAL WORKSPACE / V1.0</small><p>Your tools and saved notes stay in this browser on this device.</p></div>
+</aside>
 
-<!-- INTRO -->
-
-<div id="intro">
- <div class="intro-content">
-  <div class="intro-symbol">☪</div>
-  <div class="intro-small">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
-  <h1>Hazrat Sah Natwan<br><span class="gold">Hafizia and Ibtadae</span><br>Madrasha</h1>
-  <div class="intro-line"></div>
-  <p>ইসলামি শিক্ষা, নৈতিকতা ও সুন্দর ভবিষ্যৎ গড়ার প্রত্যয়ে</p>
-  <div class="intro-buttons">
-   <button class="gold-btn" onclick="enterSite()">প্রবেশ করুন →</button>
-   <button class="skip-btn" onclick="enterSite()">Skip</button>
-  </div>
+<main class="main">
+ <div class="topbar">
+  <div style="display:flex;align-items:center;gap:12px"><button class="mobile-menu" onclick="toggleSidebar()">☰</button><div class="crumb">ORBIT <span style="color:#566684">/</span> <b id="crumb">OVERVIEW</b></div></div>
+  <div class="top-actions"><div class="status"><span class="pulse"></span> LOCAL SYSTEM READY</div></div>
  </div>
+
+ <section class="view active" id="view-home">
+  <div class="hero">
+   <div class="hero-content">
+    <div class="kicker">✦ YOUR PERSONAL MISSION CONTROL</div>
+    <h1>Build ideas.<br><span style="color:var(--cyan)">Launch worlds.</span></h1>
+    <p>One command center for your Roblox games, scripts, creative projects, websites and learning missions.</p>
+    <div class="hero-buttons"><button class="btn primary" onclick="showView('luau')">Open Luau Builder ↗</button><button class="btn secondary" onclick="showView('planner')">Plan a project</button></div>
+   </div>
+  </div>
+  <div class="grid stats">
+   <div class="stat" style="--glow:var(--cyan)"><div class="stat-label">SAVED TASKS</div><div class="stat-value" id="statTasks">0</div><div class="stat-note">Across your workspace</div></div>
+   <div class="stat" style="--glow:var(--green)"><div class="stat-label">COMPLETED</div><div class="stat-value" id="statDone">0</div><div class="stat-note">Tasks checked off</div></div>
+   <div class="stat" style="--glow:var(--violet)"><div class="stat-label">PROJECTS</div><div class="stat-value">4</div><div class="stat-note">Your project universe</div></div>
+   <div class="stat" style="--glow:var(--amber)"><div class="stat-label">LEARNING</div><div class="stat-value" id="statLessons">0/5</div><div class="stat-note">Luau lessons completed</div></div>
+  </div>
+  <div class="section-head"><div><h2>Quick Launch</h2><p>Jump straight into your most-used tools.</p></div><button class="text-btn" onclick="showView('projects')">All projects →</button></div>
+  <div class="grid quick-grid">
+   <div class="tool-card" onclick="showView('luau')"><div class="tool-icon">⌘</div><h3>Luau Builder</h3><p>Generate starter scripts and snippets.</p></div>
+   <div class="tool-card" onclick="showView('economy')"><div class="tool-icon">◉</div><h3>Economy Lab</h3><p>Calculate eggs, rebirths and rewards.</p></div>
+   <div class="tool-card" onclick="showView('prompts')"><div class="tool-icon">✧</div><h3>Prompt Lab</h3><p>Create game art and UI prompts.</p></div>
+   <div class="tool-card" onclick="showView('shorts')"><div class="tool-icon">▷</div><h3>Shorts Studio</h3><p>Build hooks, scripts and captions.</p></div>
+  </div>
+  <div class="grid lower-grid">
+   <div class="panel"><div class="panel-title">PROJECT UNIVERSE</div><div class="projects">
+    <div class="project-row"><div class="project-orb">⚡</div><div><strong>KEYSTRIKE</strong><small>2v2 word battle · Roblox</small></div><span class="tag">MAIN BUILD</span></div>
+    <div class="project-row"><div class="project-orb">🧠</div><div><strong>+1 LUCKY BRAINROT</strong><small>Eggs, collection and rebirth</small></div><span class="tag">RELEASED</span></div>
+    <div class="project-row"><div class="project-orb">🌊</div><div><strong>AFTER THE TIDE</strong><small>Exploration · collectibles</small></div><span class="tag" style="color:var(--amber);border-color:#ffc87855">PAUSED</span></div>
+    <div class="project-row"><div class="project-orb">🤖</div><div><strong>KARLLO AI</strong><small>AI web project · GitHub Pages</small></div><span class="tag" style="color:var(--blue);border-color:#7796ff55">WEB</span></div>
+   </div></div>
+   <div class="panel"><div class="panel-title">MISSION LOG</div><div class="activity">
+    <div class="activity-item"><span class="activity-dot"></span><span>Workspace initialized. Your local tools are ready.</span></div>
+    <div class="activity-item"><span class="activity-dot" style="background:var(--green)"></span><span>Game Planner saves tasks on this device.</span></div>
+    <div class="activity-item"><span class="activity-dot" style="background:var(--amber)"></span><span>AI generation requires an external AI connection; prompt tools work offline.</span></div>
+    <div class="activity-item"><span class="activity-dot" style="background:var(--cyan)"></span><span>Choose a tool from the command deck to begin.</span></div>
+   </div></div>
+  </div>
+ </section>
+
+ <section class="view" id="view-luau">
+  <div class="kicker">ROBLOX DEVELOPMENT / SCRIPT STARTER</div><h2 class="page-title">Luau Builder</h2><p class="page-desc">Choose a beginner-friendly Roblox script pattern, customize it and copy the starter code. This generates snippets; it does not run Roblox Luau inside your browser.</p>
+  <div class="tool-layout">
+   <div class="form-panel"><h3>CONFIGURE SCRIPT</h3>
+    <div class="field"><label>STARTER TYPE</label><select id="luauType"><option value="leaderstats">Leaderstats (Coins)</option><option value="part">Part Touch Message</option><option value="click">Click Detector</option><option value="prompt">Proximity Prompt</option><option value="speed">WalkSpeed Setter</option></select></div>
+    <div class="field"><label>STAT / OBJECT NAME</label><input id="luauName" value="Coins" maxlength="30"></div>
+    <div class="field"><label>STARTING VALUE</label><input id="luauValue" type="number" value="0"></div>
+    <button class="btn primary" onclick="generateLuau()">Generate Script</button>
+   </div>
+   <div class="form-panel"><div class="output-head"><strong>GENERATED LUAU</strong><button class="text-btn" onclick="copyText('luauOutput')">COPY CODE</button></div><pre class="output" id="luauOutput">-- Choose a starter type and press Generate Script.</pre><p class="hint">Place scripts in the correct location in Roblox Studio. Server-side examples should use a normal Script unless the instructions say otherwise. Test in Studio before publishing.</p></div>
+  </div>
+ </section>
+
+ <section class="view" id="view-planner">
+  <div class="kicker">GAME DEVELOPMENT / DESIGN WORKSPACE</div><h2 class="page-title">Game Planner</h2><p class="page-desc">Turn a game idea into a clear build checklist. Your tasks are saved locally in this browser.</p>
+  <div class="tool-layout">
+   <div class="form-panel"><h3>ADD A GAME TASK</h3>
+    <div class="field"><label>PROJECT</label><select id="taskProject"><option>KEYSTRIKE</option><option>+1 LUCKY BRAINROT</option><option>AFTER THE TIDE</option><option>KARLLO AI</option><option>New idea</option></select></div>
+    <div class="field"><label>TASK NAME</label><input id="taskName" placeholder="e.g. Fix mobile shop UI"></div>
+    <div class="field"><label>DETAILS (OPTIONAL)</label><textarea id="taskDetail" placeholder="What needs to be done?"></textarea></div>
+    <button class="btn primary" onclick="addTask()">Add to task board +</button>
+   </div>
+   <div class="form-panel"><div class="output-head"><strong>YOUR BUILD QUEUE</strong><span class="small-muted" id="taskCount">0 tasks</span></div><div class="task-list" id="plannerTasks"></div></div>
+  </div>
+ </section>
+
+ <section class="view" id="view-economy">
+  <div class="kicker">ROBLOX GAME SYSTEMS / BALANCING</div><h2 class="page-title">Economy Lab</h2><p class="page-desc">Quick calculations for egg limits, rebirth progression and game rewards.</p>
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:15px">
+   <div class="form-panel"><h3>EGG LIMIT CALCULATOR</h3><div class="field"><label>BASE EGG LIMIT</label><input id="baseEgg" type="number" value="30" min="1"></div><div class="field"><label>REBIRTHS</label><input id="rebirths" type="number" value="0" min="0"></div><div class="output" id="eggResult">Egg limit: 30</div><button class="btn primary" style="margin-top:12px" onclick="calcEgg()">Calculate</button><p class="hint">Uses the progression formula: base limit × (rebirths + 1).</p></div>
+   <div class="form-panel"><h3>REWARD CALCULATOR</h3><div class="field"><label>REWARD PER ACTION</label><input id="rewardEach" type="number" value="10"></div><div class="field"><label>NUMBER OF ACTIONS</label><input id="rewardCount" type="number" value="5"></div><div class="field"><label>BONUS REWARD</label><input id="rewardBonus" type="number" value="0"></div><div class="output" id="rewardResult">Total reward: 50</div><button class="btn primary" style="margin-top:12px" onclick="calcReward()">Calculate</button></div>
+   <div class="form-panel"><h3>REBIRTH PROGRESSION TABLE</h3><div class="field"><label>BASE LIMIT</label><input id="tableBase" type="number" value="30"></div><div class="field"><label>NUMBER OF REBIRTH LEVELS</label><input id="tableLevels" type="number" value="6" min="1" max="20"></div><button class="btn primary" onclick="makeTable()">Generate table</button><div class="output" id="rebirthTable" style="margin-top:12px">0 Rebirths → 30 eggs</div></div>
+  </div>
+ </section>
+
+ <section class="view" id="view-prompts">
+  <div class="kicker">AI ART DIRECTION / ROBLOX ASSETS</div><h2 class="page-title">Prompt Lab</h2><p class="page-desc">Create detailed prompts for Roblox icons, thumbnails and game UI concepts. Copy the prompt into your chosen image tool.</p>
+  <div class="tool-layout">
+   <div class="form-panel"><h3>ART DIRECTION</h3>
+    <div class="field"><label>ASSET TYPE</label><select id="artType"><option>Roblox game icon</option><option>Roblox game thumbnail</option><option>Game UI concept</option><option>Game logo</option><option>Character concept</option></select></div>
+    <div class="field"><label>GAME / SUBJECT</label><input id="artSubject" value="KEYSTRIKE 2v2 word battle"></div>
+    <div class="row-fields"><div class="field"><label>ART STYLE</label><select id="artStyle"><option>Polished Roblox 3D render</option><option>Hand-painted game key art</option><option>Stylized 3D cinematic</option><option>Clean vector illustration</option></select></div><div class="field"><label>MOOD</label><select id="artMood"><option>Energetic and competitive</option><option>Mysterious and cinematic</option><option>Playful and colorful</option><option>Epic and dramatic</option></select></div></div>
+    <div class="field"><label>IMPORTANT DETAILS</label><textarea id="artDetails" placeholder="Characters, props, colors, composition..."></textarea></div>
+    <button class="btn primary" onclick="makeArtPrompt()">Build image prompt</button>
+   </div>
+   <div class="form-panel"><div class="output-head"><strong>IMAGE PROMPT</strong><button class="text-btn" onclick="copyText('artOutput')">COPY</button></div><div class="output" id="artOutput">Your detailed art prompt will appear here.</div></div>
+  </div>
+ </section>
+
+ <section class="view" id="view-shorts">
+  <div class="kicker">CONTENT CREATION / SHORT-FORM VIDEO</div><h2 class="page-title">Shorts Studio</h2><p class="page-desc">Plan Roblox Shorts with a hook, short script, on-screen text and caption. Generated from built-in templates, no AI API required.</p>
+  <div class="tool-layout">
+   <div class="form-panel"><h3>VIDEO SETUP</h3>
+    <div class="field"><label>VIDEO TOPIC</label><input id="shortTopic" value="Roblox funny moments"></div>
+    <div class="field"><label>VIDEO STYLE</label><select id="shortStyle"><option>Funny / relatable</option><option>Top 5 list</option><option>Challenge</option><option>Game update</option><option>Gameplay highlight</option></select></div>
+    <div class="field"><label>VIDEO LENGTH</label><select id="shortLength"><option>15 seconds</option><option>30 seconds</option><option>45 seconds</option><option>60 seconds</option></select></div>
+    <button class="btn primary" onclick="makeShort()">Generate video plan</button>
+   </div>
+   <div class="form-panel"><div class="output-head"><strong>SHORTS SCRIPT</strong><button class="text-btn" onclick="copyText('shortOutput')">COPY</button></div><div class="output" id="shortOutput">Your video plan will appear here.</div></div>
+  </div>
+ </section>
+
+ <section class="view" id="view-website">
+  <div class="kicker">WEB DEVELOPMENT / PROJECT STARTER</div><h2 class="page-title">Website Lab</h2><p class="page-desc">Create a detailed website build brief for your next HTML/CSS/JS project. This creates a prompt/specification, not a live AI website generator.</p>
+  <div class="tool-layout">
+   <div class="form-panel"><h3>PROJECT BRIEF</h3>
+    <div class="field"><label>WEBSITE NAME</label><input id="webName" placeholder="e.g. My Creator Hub"></div>
+    <div class="field"><label>WEBSITE PURPOSE</label><input id="webPurpose" placeholder="What should the website do?"></div>
+    <div class="field"><label>DESIGN THEME</label><select id="webTheme"><option>Space / futuristic</option><option>Minimal dark</option><option>Glassmorphism</option><option>Modern light</option><option>Gaming neon</option></select></div>
+    <div class="field"><label>FEATURES</label><textarea id="webFeatures" placeholder="Navigation, cards, tools, animations, local storage..."></textarea></div>
+    <button class="btn primary" onclick="makeWebBrief()">Generate website brief</button>
+   </div>
+   <div class="form-panel"><div class="output-head"><strong>BUILD SPECIFICATION</strong><button class="text-btn" onclick="copyText('webOutput')">COPY</button></div><div class="output" id="webOutput">Your website specification will appear here.</div></div>
+  </div>
+ </section>
+
+ <section class="view" id="view-code">
+  <div class="kicker">FRONTEND / TEXT UTILITIES</div><h2 class="page-title">Code Toolkit</h2><p class="page-desc">Useful offline text and code helpers for HTML, CSS, JavaScript and Roblox notes.</p>
+  <div class="tool-layout">
+   <div class="form-panel"><h3>CODE / TEXT INPUT</h3>
+    <div class="field"><label>PASTE YOUR CODE OR TEXT</label><textarea id="codeInput" style="min-height:250px;font-family:'DM Mono';font-size:11px" placeholder="Paste HTML, CSS, JavaScript or text here..."></textarea></div>
+    <div class="action-row"><button class="btn primary" onclick="inspectCode()">Inspect</button><button class="btn secondary" onclick="cleanText()">Trim whitespace</button><button class="btn secondary" onclick="clearCode()">Clear</button></div>
+   </div>
+   <div class="form-panel"><div class="output-head"><strong>INSPECTION RESULTS</strong></div><div class="output" id="codeOutput">Paste some code and choose Inspect.</div><p class="hint">This is a basic text inspector, not a full compiler or security scanner. It cannot execute Roblox scripts.</p></div>
+  </div>
+ </section>
+
+ <section class="view" id="view-study">
+  <div class="kicker">LEARNING MISSIONS / LUAU BASICS</div><h2 class="page-title">Study Hub</h2><p class="page-desc">A small learning tracker for beginner Luau concepts. Complete lessons and test your understanding.</p>
+  <div class="tool-layout">
+   <div class="form-panel"><h3>LUAU LEARNING PATH</h3><div id="lessons"></div></div>
+   <div class="form-panel"><h3>QUICK KNOWLEDGE CHECK</h3><p class="small-muted" id="quizQuestion">What does print() do in Luau?</p><div id="quizOptions"></div><div class="feedback" id="quizFeedback"></div><button class="btn secondary" style="margin-top:12px" onclick="nextQuiz()">Next question ↗</button></div>
+  </div>
+ </section>
+
+ <section class="view" id="view-projects">
+  <div class="kicker">YOUR CREATIVE UNIVERSE</div><h2 class="page-title">My Projects</h2><p class="page-desc">Your current and planned projects in one place.</p>
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px">
+   <div class="project-card" style="padding:20px"><div class="tool-icon">⚡</div><h3 style="font-size:15px">KEYSTRIKE</h3><p class="small-muted">2v2 Red vs Blue word battle. Luau, match flow, ranked, auras and player progression.</p><div class="tag" style="display:inline-block;margin:13px 0 0">MAIN BUILD</div></div>
+   <div class="project-card" style="padding:20px"><div class="tool-icon">🧠</div><h3 style="font-size:15px">+1 LUCKY BRAINROT</h3><p class="small-muted">Egg hatching, collecting brainrots, rebirth progression and player retention.</p><div class="tag" style="display:inline-block;margin:13px 0 0">RELEASED</div></div>
+   <div class="project-card" style="padding:20px"><div class="tool-icon">🌊</div><h3 style="font-size:15px">AFTER THE TIDE</h3><p class="small-muted">Exploration game with shell collection, cave progression and ocean mechanics.</p><div class="tag" style="display:inline-block;margin:13px 0 0;color:var(--amber);border-color:#ffc87855">PAUSED</div></div>
+   <div class="project-card" style="padding:20px"><div class="tool-icon">🤖</div><h3 style="font-size:15px">KARLLO AI</h3><p class="small-muted">Personal AI website concept and GitHub Pages development.</p><div class="tag" style="display:inline-block;margin:13px 0 0;color:var(--blue);border-color:#7796ff55">WEB PROJECT</div></div>
+  </div>
+ </section>
+
+ <section class="view" id="view-tasks">
+  <div class="kicker">MISSION CONTROL / PERSONAL PRODUCTIVITY</div><h2 class="page-title">Task Board</h2><p class="page-desc">All your saved tasks, with completion tracking. Stored only in this browser.</p>
+  <div class="form-panel"><div class="output-head"><strong>ALL MISSIONS</strong><button class="text-btn" onclick="clearCompleted()">CLEAR COMPLETED</button></div><div id="allTasks" class="task-list"></div></div>
+ </section>
+</main>
 </div>
-
-<!-- HEADER -->
-
-<header>
- <div class="container navbar">
-  <a class="brand" href="#home">
-   <div class="brand-icon">☪</div>
-   <div class="brand-text">
-    <strong>SAH NATWAN MADRASHA</strong>
-    <span>HAFIZIA & IBTADAE</span>
-   </div>
-  </a>
-
-  <nav class="nav-links" id="navLinks">
-   <a href="#home">হোম</a>
-   <a href="#about">পরিচিতি</a>
-   <a href="#teachers">শিক্ষকমণ্ডলী</a>
-   <a href="#education">শিক্ষা কার্যক্রম</a>
-   <a href="#notices">নোটিশ</a>
-   <a href="#library">বইঘর</a>
-  </nav>
-
-  <button class="menu-btn" onclick="toggleMenu()" aria-label="Menu">☰</button>
- </div>
-</header>
-
-<!-- HERO -->
-
-<section class="hero" id="home">
- <div class="container">
-  <div class="hero-content">
-   <div class="eyebrow">WELCOME TO OUR MADRASHA</div>
-   <h1>ইলমের আলোয়<br><span class="gold">গড়ে উঠুক</span> সুন্দর জীবন</h1>
-   <p>
-    Hazrat Sah Natwan Hafizia and Ibtadae Madrasha।
-    কুরআন ও ইসলামী শিক্ষার মাধ্যমে আদর্শ মানুষ গড়ে তোলার একটি শিক্ষাপ্রতিষ্ঠান।
-   </p>
-   <div class="hero-buttons">
-    <a href="#about"><button class="gold-btn">মাদরাসা সম্পর্কে জানুন</button></a>
-    <a href="#library"><button class="outline-btn">বই পড়ুন →</button></a>
-   </div>
-  </div>
- </div>
-
- <div class="container hero-bottom">
-  <span>✦ KNOWLEDGE • FAITH • CHARACTER</span>
-  <span>EST. ISLAMIC EDUCATION</span>
- </div>
-</section>
-
-<!-- ABOUT -->
-
-<section class="section" id="about">
- <div class="container about-grid">
-  <div class="about-text reveal">
-   <div class="eyebrow">ABOUT OUR INSTITUTION</div>
-   <h2 class="section-title">আমাদের <span class="gold">মাদরাসা</span></h2>
-   <div class="heading-line"></div>
-
-   <p>
-    Hazrat Sah Natwan Hafizia and Ibtadae Madrasha একটি ইসলামি শিক্ষাপ্রতিষ্ঠান।
-    এখানে কুরআন শিক্ষা, প্রাথমিক দ্বীনি জ্ঞান, নৈতিকতা এবং উত্তম চরিত্র গঠনের ওপর গুরুত্ব দেওয়া হয়।
-   </p>
-
-   <p>
-    শিক্ষার্থীদের জ্ঞান অর্জনের পাশাপাশি শৃঙ্খলা, দায়িত্ববোধ, সততা এবং
-    সুন্দর আচরণে উৎসাহিত করাই আমাদের শিক্ষার অন্যতম উদ্দেশ্য।
-   </p>
-
-   <p>
-    আমাদের লক্ষ্য হলো এমন শিক্ষার্থী গড়ে তোলা যারা দ্বীনি শিক্ষা ও ভালো
-    চরিত্রের মাধ্যমে পরিবার এবং সমাজের কল্যাণে ভূমিকা রাখতে পারে।
-   </p>
-  </div>
-
-  <div class="about-visual reveal">
-   <div>
-    <strong>জ্ঞান • আমল • আখলাক</strong>
-    <span>ইসলামি শিক্ষার তিনটি গুরুত্বপূর্ণ ভিত্তি</span>
-   </div>
-  </div>
- </div>
-</section>
-
-<!-- TEACHERS -->
-
-<section class="section" id="teachers" style="background:#0d2a21">
- <div class="container">
-  <div class="section-heading reveal">
-   <div class="eyebrow">OUR TEACHERS</div>
-   <h2 class="section-title">আমাদের <span class="gold">শিক্ষকমণ্ডলী</span></h2>
-   <p class="section-sub">শিক্ষার্থীদের জ্ঞান ও চরিত্র গঠনে দায়িত্বশীল শিক্ষকবৃন্দ।</p>
-   <div class="heading-line"></div>
-  </div>
-
-  <div class="cards">
-   <div class="card reveal">
-    <div class="card-icon">✦</div>
-    <div class="teacher-role">HUJUR / TEACHER</div>
-    <h3>Ashiqul Hujur</h3>
-    <p>মাদরাসার শিক্ষক। শিক্ষার্থীদের দ্বীনি শিক্ষা ও উত্তম চরিত্র গঠনে ভূমিকা রাখেন।</p>
-   </div>
-
-   <div class="card reveal">
-    <div class="card-icon">✧</div>
-    <div class="teacher-role">HUJUR / TEACHER</div>
-    <h3>Fokrul Hujur</h3>
-    <p>মাদরাসার শিক্ষক। শিক্ষার্থীদের শিক্ষা ও নৈতিক উন্নয়নে দায়িত্ব পালন করেন।</p>
-   </div>
-
-   <div class="card reveal">
-    <div class="card-icon">☪</div>
-    <div class="teacher-role">EDUCATION</div>
-    <h3>দ্বীনি শিক্ষা</h3>
-    <p>কুরআন, ইসলামী আদব, নৈতিকতা এবং প্রয়োজনীয় দ্বীনি জ্ঞান অর্জনে উৎসাহ প্রদান।</p>
-   </div>
-  </div>
- </div>
-</section>
-
-<!-- EDUCATION -->
-
-<section class="section" id="education">
- <div class="container">
-  <div class="section-heading reveal">
-   <div class="eyebrow">EDUCATIONAL PROGRAMS</div>
-   <h2 class="section-title">শিক্ষা ও <span class="gold">কার্যক্রম</span></h2>
-   <p class="section-sub">মাদরাসার জন্য প্রাসঙ্গিক বিভিন্ন শিক্ষা কার্যক্রমের পরিচিতি।</p>
-   <div class="heading-line"></div>
-  </div>
-
-  <div class="cards">
-   <div class="card reveal">
-    <div class="card-icon">📖</div>
-    <h3>হিফজুল কুরআন</h3>
-    <p>পবিত্র কুরআন মুখস্থ করা, নিয়মিত তিলাওয়াত এবং মুখস্থ পাঠের অনুশীলন।</p>
-   </div>
-
-   <div class="card reveal">
-    <div class="card-icon">🕌</div>
-    <h3>প্রাথমিক দ্বীনি শিক্ষা</h3>
-    <p>ইসলামের মৌলিক বিষয়, নামাজ, দোয়া এবং প্রয়োজনীয় মাসআলা শেখা।</p>
-   </div>
-
-   <div class="card reveal">
-    <div class="card-icon">✍️</div>
-    <h3>ইবতেদায়ি শিক্ষা</h3>
-    <p>প্রাথমিক পাঠ, বাংলা, আরবি, গণিত ও প্রয়োজনীয় সাধারণ জ্ঞান।</p>
-   </div>
-
-   <div class="card reveal">
-    <div class="card-icon">🌙</div>
-    <h3>আদব ও আখলাক</h3>
-    <p>সত্যবাদিতা, শিষ্টাচার, সম্মান, ধৈর্য এবং সুন্দর ব্যবহার শেখা।</p>
-   </div>
-
-   <div class="card reveal">
-    <div class="card-icon">📚</div>
-    <h3>নিয়মিত পড়াশোনা</h3>
-    <p>পাঠ পুনরাবৃত্তি, নিয়মিত অনুশীলন এবং শেখার অগ্রগতি যাচাই।</p>
-   </div>
-
-   <div class="card reveal">
-    <div class="card-icon">🤝</div>
-    <h3>শৃঙ্খলা ও দায়িত্ব</h3>
-    <p>সময়ানুবর্তিতা, পরিচ্ছন্নতা, সহমর্মিতা ও দায়িত্বশীল আচরণের চর্চা।</p>
-   </div>
-  </div>
- </div>
-</section>
-
-<!-- NOTICE -->
-
-<section class="section" id="notices" style="background:#0d2a21">
- <div class="container">
-  <div class="section-heading reveal">
-   <div class="eyebrow">LATEST INFORMATION</div>
-   <h2 class="section-title">নোটিশ <span class="gold">বোর্ড</span></h2>
-   <p class="section-sub">প্রতিষ্ঠানের গুরুত্বপূর্ণ ঘোষণা ও তথ্য।</p>
-  </div>
-
-  <div class="notice-box reveal">
-   <div class="notice-icon">📢</div>
-   <div>
-    <h3>স্বাগতম!</h3>
-    <p>মাদরাসার নতুন ওয়েবসাইটে সবাইকে স্বাগতম। নতুন নোটিশ প্রকাশিত হলে এখানে যুক্ত করা হবে।</p>
-    <small class="muted">প্রকাশিত ঘোষণা</small>
-   </div>
-  </div>
- </div>
-</section>
-
-<!-- LIBRARY -->
-
-<section class="section library-section" id="library">
- <div class="container">
-  <div class="section-heading reveal">
-   <div class="eyebrow">ISLAMIC DIGITAL LIBRARY</div>
-   <h2 class="section-title">আমাদের <span class="gold">বইঘর</span></h2>
-   <p class="section-sub">ইসলামি ইতিহাস ও নবীদের জীবন থেকে শিক্ষা গ্রহণ করুন।</p>
-  </div>
-
-  <div class="book-grid">
-   <div class="book-cover reveal">
-    <div class="book-cover-content">
-     <div class="arabic">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
-     <div class="ornament">☪ ✧ ☪</div>
-     <h2>হযরত<br>মূসা (আ.)<br>এর কাহিনী</h2>
-     <div class="ornament">❖ ❖ ❖</div>
-     <p>এক নবীর জীবন ও সংগ্রামের কাহিনী</p>
-     <p style="margin-top:25px;color:#e4c982">লেখক: Sahin Hujur</p>
-    </div>
-   </div>
-
-   <div class="book-details reveal">
-    <div class="eyebrow">FEATURED BOOK</div>
-    <h2>হযরত মূসা (আ.)-এর <span class="gold">জীবনী</span></h2>
-    <p>
-     ফেরাউনের অত্যাচারের যুগে জন্ম, আল্লাহর বিশেষ হেফাজত,
-     নবুওয়াত লাভ, ফেরাউনের সামনে সত্যের দাওয়াত,
-     বনী ইসরাইলকে মুক্ত করা এবং তূর পাহাড়ের ঘটনা—
-     এই বইয়ে কুরআনে বর্ণিত হযরত মূসা (আ.)-এর জীবনের
-     গুরুত্বপূর্ণ ঘটনাগুলো ধারাবাহিকভাবে তুলে ধরা হয়েছে।
-    </p>
-
-    <div class="book-meta">
-     <span>📖 ১০টি অধ্যায়</span>
-     <span>✦ বাংলা ভাষা</span>
-     <span>✍ Sahin Hujur</span>
-    </div>
-
-    <button class="gold-btn" onclick="openBook()">বই পড়া শুরু করুন →</button>
-    <p style="font-size:12px;margin-top:20px">বিষয়বস্তু কুরআনের বর্ণনার ভিত্তিতে সংকলিত শিক্ষামূলক লেখা।</p>
-   </div>
-  </div>
- </div>
-</section>
-
-<!-- BOOK READER -->
-
-<section id="reader">
- <div class="container">
-  <div class="reader-top">
-   <div>
-    <div class="eyebrow">DIGITAL BOOK READER</div>
-    <h2>হযরত মূসা (আ.)-এর কাহিনী</h2>
-   </div>
-
-   <div class="reader-tools">
-    <button class="tool-btn" onclick="changeFont(-1)">A−</button>
-    <button class="tool-btn" onclick="changeFont(1)">A+</button>
-    <button class="tool-btn" id="bookmarkBtn" onclick="toggleBookmark()">☆ Bookmark</button>
-    <button class="tool-btn" onclick="closeBook()">✕ বন্ধ</button>
-   </div>
-  </div>
-
-  <div class="read-progress"><div id="readBar"></div></div>
-
-  <div class="reader-layout">
-   <aside class="chapter-list">
-    <h3>সূচিপত্র</h3>
-    <div class="chapter-list-inner" id="chapterList"></div>
-   </aside>
-
-   <div>
-    <article class="paper" id="paper"></article>
-
-    <div class="reader-navigation">
-     <button class="outline-btn" id="previousChapter" onclick="moveChapter(-1)">← আগের অধ্যায়</button>
-     <span class="bookmark-status" id="readerCounter">১ / ১০</span>
-     <button class="gold-btn" id="nextChapter" onclick="moveChapter(1)">পরের অধ্যায় →</button>
-    </div>
-   </div>
-  </div>
- </div>
-</section>
-
-<!-- FOOTER -->
-
-<footer>
- <div class="container">
-  <div class="footer-grid">
-   <div>
-    <h3>Hazrat Sah Natwan Madrasha</h3>
-    <p>Hafizia and Ibtadae Madrasha। দ্বীনি শিক্ষা, সুন্দর চরিত্র ও জ্ঞান অর্জনের প্রত্যয়ে।</p>
-   </div>
-
-   <div>
-    <h3>Quick Links</h3>
-    <a href="#home">হোম</a>
-    <a href="#about">পরিচিতি</a>
-    <a href="#teachers">শিক্ষকবৃন্দ</a>
-    <a href="#library">বইঘর</a>
-   </div>
-
-   <div>
-    <h3>শিক্ষকমণ্ডলী</h3>
-    <p>Ashiqul Hujur</p>
-    <p>Fokrul Hujur</p>
-    <p>লেখক: Sahin Hujur</p>
-   </div>
-  </div>
-
-  <div class="copyright">
-   © 2026 Hazrat Sah Natwan Hafizia and Ibtadae Madrasha. All Rights Reserved.
-  </div>
- </div>
-</footer>
+<div class="toast" id="toast">Copied to clipboard</div>
 
 <script>
+const $=id=>document.getElementById(id);
+const safeGet=(key,fallback)=>{try{return JSON.parse(localStorage.getItem(key))??fallback}catch(e){return fallback}};
+const safeSet=(key,value)=>{try{localStorage.setItem(key,JSON.stringify(value))}catch(e){showToast("Storage unavailable in this browser")}};
+let tasks=safeGet("orbit_tasks",[]);
+let completedLessons=safeGet("orbit_lessons",[]);
+let quizIndex=0;
 
-/* INTRO */
-
-function enterSite(){
- document.getElementById("intro").classList.add("hide");
+function showToast(message){const t=$("toast");t.textContent=message;t.classList.add("show");clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.classList.remove("show"),2100)}
+function copyText(id){const el=$(id);const text=el.innerText||el.value||"";if(!text.trim()){showToast("Nothing to copy yet");return}if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(text).then(()=>showToast("Copied to clipboard")).catch(()=>fallbackCopy(text))}else fallbackCopy(text)}
+function fallbackCopy(text){const ta=document.createElement("textarea");ta.value=text;document.body.appendChild(ta);ta.select();try{document.execCommand("copy");showToast("Copied to clipboard")}catch(e){showToast("Copy unavailable; select the text manually")}ta.remove()}
+function showView(name){
+ document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
+ const view=$("view-"+name);if(view)view.classList.add("active");
+ document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.view===name));
+ $("crumb").textContent=name.replace(/-/g," ").toUpperCase();
+ closeSidebar();window.scrollTo({top:0,behavior:"smooth"});
+ if(name==="tasks")renderTasks();if(name==="planner")renderPlanner();if(name==="study")renderLessons();
 }
+document.querySelectorAll(".nav button").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.view)));
+function toggleSidebar(){$("sidebar").classList.toggle("open");$("overlay").classList.toggle("show")}
+function closeSidebar(){$("sidebar").classList.remove("open");$("overlay").classList.remove("show")}
 
-/* Uncomment for automatic intro exit */
-/* setTimeout(enterSite,7000); */
-
-/* NAVIGATION */
-
-function toggleMenu(){
- document.getElementById("navLinks").classList.toggle("show");
+/* Luau starter templates */
+function generateLuau(){
+ const type=$("luauType").value,name=($("luauName").value.trim()||"Coins").replace(/[^A-Za-z0-9_]/g,""),value=Math.max(0,Number($("luauValue").value)||0);
+ let code="";
+ if(type==="leaderstats")code=`-- Server Script: ServerScriptService\nlocal Players = game:GetService(\"Players\")\n\nPlayers.PlayerAdded:Connect(function(player)\n    local leaderstats = Instance.new(\"Folder\")\n    leaderstats.Name = \"leaderstats\"\n    leaderstats.Parent = player\n\n    local ${name} = Instance.new(\"IntValue\")\n    ${name}.Name = \"${name}\"\n    ${name}.Value = ${Math.floor(value)}\n    ${name}.Parent = leaderstats\nend)`;
+ if(type==="part")code=`-- Script: put this Script inside the Part\nlocal part = script.Parent\nlocal debounce = {}\n\npart.Touched:Connect(function(hit)\n    local character = hit.Parent\n    local player = game.Players:GetPlayerFromCharacter(character)\n    if not player or debounce[player] then return end\n\n    debounce[player] = true\n    print(player.Name .. \" touched the part!\")\n    task.wait(1)\n    debounce[player] = nil\nend)`;
+ if(type==="click")code=`-- Script: put this Script inside a Part with a ClickDetector\nlocal clickDetector = script.Parent:WaitForChild(\"ClickDetector\")\n\nclickDetector.MouseClick:Connect(function(player)\n    print(player.Name .. \" clicked the part!\")\nend)`;
+ if(type==="prompt")code=`-- Script: put this Script inside a Part with a ProximityPrompt\nlocal prompt = script.Parent:WaitForChild(\"ProximityPrompt\")\n\nprompt.Triggered:Connect(function(player)\n    print(player.Name .. \" activated the prompt!\")\nend)`;
+ if(type==="speed")code=`-- Server Script: ServerScriptService\nlocal Players = game:GetService(\"Players\")\nlocal WALK_SPEED = ${Math.max(1,Math.floor(value||16))}\n\nPlayers.PlayerAdded:Connect(function(player)\n    player.CharacterAdded:Connect(function(character)\n        local humanoid = character:WaitForChild(\"Humanoid\")\n        humanoid.WalkSpeed = WALK_SPEED\n    end)\nend)`;
+ $("luauOutput").textContent=code;
 }
-
-document.querySelectorAll(".nav-links a").forEach(link=>{
- link.addEventListener("click",()=>{
-  document.getElementById("navLinks").classList.remove("show");
- });
-});
-
-/* REVEAL ANIMATION */
-
-const observer=new IntersectionObserver(entries=>{
- entries.forEach(entry=>{
-  if(entry.isIntersecting){
-   entry.target.classList.add("visible");
-   observer.unobserve(entry.target);
-  }
- });
-},{threshold:.12});
-
-document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
-
-/* BOOK CONTENT */
-
-const chapters=[
-
-{
-title:"জন্ম ও শৈশব",
-paragraphs:[
-"প্রাচীন মিশরে ফেরাউন নামে এক অত্যাচারী শাসক রাজত্ব করত। সে নিজেকে অত্যন্ত ক্ষমতাধর মনে করত এবং বনী ইসরাইলের মানুষের ওপর কঠোর নির্যাতন চালাত। আল্লাহর ইচ্ছায় সে যুগেই হযরত মূসা (আ.)-এর জন্ম হয়।",
-"ফেরাউনের অত্যাচারের মধ্যে বনী ইসরাইলের পরিবারগুলো ভীত ও চিন্তিত ছিল। আল্লাহর পক্ষ থেকে মূসা (আ.)-এর মাকে নির্দেশ দেওয়া হয়, শিশুকে দুধ পান করাতে এবং ভয় হলে তাকে নদীতে ভাসিয়ে দিতে। আল্লাহ তাঁকে নিরাপদে ফিরিয়ে দেওয়ার আশ্বাস দেন।",
-"মূসা (আ.)-এর মা আল্লাহর নির্দেশ অনুসরণ করে শিশুকে একটি সিন্দুকে রেখে নদীতে ভাসিয়ে দেন। আল্লাহর পরিকল্পনায় সেই সিন্দুক ফেরাউনের প্রাসাদের কাছে পৌঁছে যায়।",
-"ফেরাউনের পরিবারের লোকেরা শিশুটিকে উদ্ধার করে। ফেরাউনের স্ত্রী শিশুটিকে হত্যা না করে লালন-পালনের অনুরোধ করেন। এভাবেই মূসা (আ.) ফেরাউনের প্রাসাদে বড় হওয়ার সুযোগ পান।",
-"আল্লাহর বিশেষ ব্যবস্থায় মূসা (আ.) নিজের মায়ের কাছেই দুধ পান করার জন্য ফিরে আসেন। তাঁর মা আবার সন্তানকে কাছে পান। আল্লাহর প্রতিশ্রুতি সত্য হয়ে যায়।"
-],
-lesson:"আল্লাহর পরিকল্পনা মানুষের ধারণার বাইরে। বিপদের সময়ও তাঁর ওপর ভরসা রাখা উচিত।"
-},
-
-{
-title:"প্রাসাদ থেকে মাদইয়ান",
-paragraphs:[
-"মূসা (আ.) যখন বড় হলেন, আল্লাহ তাঁকে জ্ঞান ও প্রজ্ঞা দান করলেন। একদিন তিনি শহরে প্রবেশ করে দেখলেন, দুই ব্যক্তি বিবাদে লিপ্ত। একজন তাঁর সম্প্রদায়ের এবং অন্যজন শত্রুপক্ষের লোক ছিল।",
-"নিজ সম্প্রদায়ের লোকটি সাহায্য চাইলে মূসা (আ.) তাকে সাহায্য করেন। এ ঘটনার ফলে অনিচ্ছাকৃতভাবে এক ব্যক্তি মারা যায়। মূসা (আ.) সঙ্গে সঙ্গে আল্লাহর কাছে ক্ষমা প্রার্থনা করেন। আল্লাহ তাঁকে ক্ষমা করেন।",
-"পরদিন তিনি জানতে পারেন যে তাঁকে হত্যার ষড়যন্ত্র করা হচ্ছে। একজন শুভাকাঙ্ক্ষী তাঁকে সতর্ক করে দেন। তখন তিনি মিশর ছেড়ে মাদইয়ানের দিকে রওনা হন।",
-"দীর্ঘ পথ পাড়ি দিয়ে মাদইয়ানে পৌঁছে তিনি একটি কূপের কাছে কিছু রাখালকে পশুদের পানি পান করাতে দেখেন। পাশে দুই নারী নিজেদের পশুদের অপেক্ষায় রেখেছিলেন।",
-"মূসা (আ.) তাঁদের সাহায্য করেন এবং পশুদের পানি পান করান। এরপর তিনি একটি গাছের ছায়ায় বসে আল্লাহর কাছে সাহায্য ও কল্যাণ প্রার্থনা করেন।"
-],
-lesson:"অন্যের বিপদে সাহায্য করা মহৎ কাজ। নিজের ভুল বুঝতে পারলে আল্লাহর কাছে ক্ষমা চাইতে হবে।"
-},
-
-{
-title:"মাদইয়ানে জীবন",
-paragraphs:[
-"মাদইয়ানে সাহায্যপ্রাপ্ত দুই নারীর একজন তাঁর বাবার কাছে মূসা (আ.)-এর কথা জানান। তাঁর বাবা মূসা (আ.)-কে ডেকে পাঠান এবং নিরাপদে তাঁর সঙ্গে দেখা করেন।",
-"মূসা (আ.) নিজের জীবনের ঘটনা খুলে বলেন। তখন সেই ব্যক্তি তাঁকে আশ্বস্ত করেন যে তিনি অত্যাচারী লোকদের হাত থেকে নিরাপদে এখানে এসেছেন।",
-"দুই নারীর একজন প্রস্তাব করেন যে তাঁর বাবা যেন মূসা (আ.)-কে কাজে নিয়োগ করেন। কারণ তিনি শক্তিশালী ও বিশ্বস্ত। এই দুটি গুণের গুরুত্ব এখানে বিশেষভাবে প্রকাশ পায়।",
-"এরপর তাঁদের মধ্যে নির্দিষ্ট মেয়াদে কাজ করার চুক্তি হয়। মূসা (আ.) মাদইয়ানে অবস্থান করেন এবং সেখানে তাঁর জীবনের একটি নতুন অধ্যায় শুরু হয়।",
-"এই সময়টি ছিল তাঁর জন্য শিক্ষা, অভিজ্ঞতা এবং ভবিষ্যতের গুরুত্বপূর্ণ দায়িত্বের প্রস্তুতির সময়।"
-],
-lesson:"কাজের ক্ষেত্রে শক্তি ও বিশ্বস্ততা গুরুত্বপূর্ণ। প্রতিশ্রুতি রক্ষা করা একজন মুমিনের গুণ।"
-},
-
-{
-title:"নবুওয়াত লাভ",
-paragraphs:[
-"নির্ধারিত সময় শেষে মূসা (আ.) পরিবারসহ মাদইয়ান থেকে যাত্রা করেন। পথে তিনি তূর পাহাড়ের দিক থেকে আগুনের মতো আলো দেখতে পান। তিনি পরিবারের লোকদের অপেক্ষা করতে বলে সেদিকে এগিয়ে যান।",
-"সেখানে আল্লাহ তাআলা তাঁর সঙ্গে কথা বলেন এবং তাঁকে নবুওয়াত দান করেন। তাঁকে জানানো হয় যে তিনি আল্লাহর মনোনীত রাসুল।",
-"আল্লাহ তাঁকে নির্দেশ দেন, যেন তিনি তাঁর ইবাদত করেন এবং মানুষের কাছে আল্লাহর বাণী পৌঁছে দেন। তাঁকে নামাজ প্রতিষ্ঠার নির্দেশও দেওয়া হয়।",
-"আল্লাহ মূসা (আ.)-কে দুটি বিশেষ নিদর্শন দান করেন। তাঁর লাঠি আল্লাহর নির্দেশে জীবন্ত সাপের মতো হয়ে যেত এবং তাঁর হাত বগলের নিচে থেকে বের করলে উজ্জ্বল হয়ে উঠত।",
-"মূসা (আ.) নিজের ভাই হারুন (আ.)-কে সহযোগী হিসেবে চাওয়ার আবেদন করেন। আল্লাহ তাঁর আবেদন কবুল করেন এবং হারুন (আ.)-কেও নবুওয়াত দান করেন।"
-],
-lesson:"নবীদের দায়িত্ব ছিল মানুষকে এক আল্লাহর ইবাদতের দিকে আহ্বান করা। নামাজ আল্লাহর সঙ্গে সম্পর্কের গুরুত্বপূর্ণ মাধ্যম।"
-},
-
-{
-title:"ফেরাউনের দরবারে দাওয়াত",
-paragraphs:[
-"আল্লাহ মূসা (আ.) ও হারুন (আ.)-কে ফেরাউনের কাছে যাওয়ার নির্দেশ দেন। তাদের বলা হয়, ফেরাউনের সঙ্গে কথা বলার সময়ও যেন তারা নম্র ভাষা ব্যবহার করেন।",
-"দুই নবী ফেরাউনের সামনে উপস্থিত হয়ে তাকে এক আল্লাহর ইবাদত করতে এবং বনী ইসরাইলকে অত্যাচার থেকে মুক্তি দিতে বলেন।",
-"ফেরাউন তাদের কথা অস্বীকার করে এবং নিজের ক্ষমতার কথা তুলে ধরে। সে মূসা (আ.)-এর পরিচয় ও বার্তা নিয়ে প্রশ্ন তোলে।",
-"মূসা (আ.) আল্লাহর পক্ষ থেকে পাওয়া নিদর্শন দেখান। লাঠি সাপে পরিণত হয় এবং তাঁর হাত উজ্জ্বল হয়ে ওঠে। কিন্তু ফেরাউন ও তার অনুসারীরা অহংকারের কারণে সত্য গ্রহণ করতে চায়নি।",
-"মূসা (আ.) বারবার আল্লাহর বাণী পৌঁছে দেন। তিনি নিজের ব্যক্তিগত শক্তির ওপর নয়, বরং আল্লাহর সাহায্যের ওপর নির্ভর করেন।"
-],
-lesson:"সত্য কথা বলতে হবে। ক্ষমতা ও অহংকার মানুষকে সত্য গ্রহণ থেকে দূরে সরিয়ে দিতে পারে।"
-},
-
-{
-title:"জাদুকরদের সঙ্গে প্রতিযোগিতা",
-paragraphs:[
-"ফেরাউন মূসা (আ.)-এর নিদর্শনকে জাদু বলে প্রচার করে। সে দেশের দক্ষ জাদুকরদের একত্র করে একটি বড় আয়োজনের ব্যবস্থা করে।",
-"নির্ধারিত দিনে বহু মানুষ উপস্থিত হয়। জাদুকররা নিজেদের দড়ি ও লাঠি নিক্ষেপ করলে মানুষের চোখে সেগুলো চলমান মনে হয়।",
-"আল্লাহর নির্দেশে মূসা (আ.) তাঁর লাঠি নিক্ষেপ করেন। সেটি তাদের তৈরি করা মিথ্যা দৃশ্যগুলোকে গ্রাস করে ফেলে।",
-"জাদুকররা বুঝতে পারে যে এটি সাধারণ জাদু নয়। তারা সত্য উপলব্ধি করে আল্লাহর প্রতি ঈমান আনে এবং সিজদায় পড়ে যায়।",
-"ফেরাউন তাদের ভয় দেখালেও তারা নিজেদের বিশ্বাস থেকে ফিরে যায়নি। তারা আল্লাহর কাছে ধৈর্য ও ক্ষমা প্রার্থনা করে।"
-],
-lesson:"সত্য স্পষ্ট হলে তা গ্রহণ করতে সাহসী হতে হয়। মানুষের ভয় নয়, আল্লাহর সন্তুষ্টিই সবচেয়ে গুরুত্বপূর্ণ।"
-},
-
-{
-title:"বনী ইসরাইলের মুক্তির পথ",
-paragraphs:[
-"ফেরাউন ও তার অনুসারীরা বনী ইসরাইলের ওপর অত্যাচার চালিয়ে যেতে থাকে। মূসা (আ.) তাদের আল্লাহর ওপর ভরসা রাখতে এবং ধৈর্য ধারণ করতে বলেন।",
-"আল্লাহ ফেরাউন ও তার জাতির কাছে বিভিন্ন নিদর্শন পাঠান। তাদের সতর্ক করার জন্য দুর্ভিক্ষ ও অন্যান্য বিপদের মতো শাস্তি আসে। কিন্তু তারা বারবার প্রতিশ্রুতি ভঙ্গ করে।",
-"অবশেষে আল্লাহ মূসা (আ.)-কে বনী ইসরাইলকে নিয়ে রাতের বেলায় বের হয়ে যাওয়ার নির্দেশ দেন। মূসা (আ.) আল্লাহর নির্দেশ অনুযায়ী তাঁর সম্প্রদায়কে নিয়ে যাত্রা করেন।",
-"ফেরাউন তার বাহিনী নিয়ে তাদের পিছু নেয়। সামনে ছিল সমুদ্র আর পেছনে ফেরাউনের বিশাল বাহিনী। বনী ইসরাইলের লোকেরা ভয় পেয়ে যায়।",
-"মূসা (আ.) দৃঢ়ভাবে বলেন যে তাঁর সঙ্গে তাঁর রব আছেন এবং তিনি তাঁকে পথ দেখাবেন। আল্লাহর সাহায্যের প্রতি তাঁর অটল বিশ্বাস এখানে প্রকাশ পায়।"
-],
-lesson:"কঠিন অবস্থায় হতাশ হওয়া যাবে না। আল্লাহর সাহায্যের ওপর ভরসা রাখতে হবে।"
-},
-
-{
-title:"সমুদ্র বিভক্ত হওয়া",
-paragraphs:[
-"সমুদ্রের সামনে পৌঁছানোর পর আল্লাহ মূসা (আ.)-কে তাঁর লাঠি দিয়ে সমুদ্রে আঘাত করার নির্দেশ দেন। তিনি আল্লাহর আদেশ পালন করেন।",
-"আল্লাহর অসীম ক্ষমতায় সমুদ্রের পানি দুই পাশে সরে গিয়ে মাঝখানে শুকনো পথ তৈরি হয়। পানি বিশাল পাহাড়ের মতো দুই পাশে দাঁড়িয়ে থাকে।",
-"মূসা (আ.) এবং বনী ইসরাইলের লোকেরা সেই পথ দিয়ে নিরাপদে সমুদ্র পার হয়ে যান। এটি ছিল আল্লাহর পক্ষ থেকে এক মহান নিদর্শন।",
-"ফেরাউন ও তার বাহিনীও তাদের পিছু নিয়ে সেই পথে প্রবেশ করে। কিন্তু তারা সমুদ্রের মধ্যে পৌঁছালে আল্লাহর নির্দেশে পানি আবার একত্রিত হয়ে যায়।",
-"ফেরাউন ও তার বাহিনী ডুবে যায়। এভাবে আল্লাহ মূসা (আ.) ও তাঁর অনুসারীদের উদ্ধার করেন এবং অত্যাচারীর পরিণতি প্রকাশ করেন।"
-],
-lesson:"আল্লাহ সবকিছুর ওপর ক্ষমতাবান। জুলুম ও অহংকারের পরিণতি ভয়াবহ।"
-},
-
-{
-title:"তূর পাহাড় ও তাওরাত",
-paragraphs:[
-"বনী ইসরাইল মুক্ত হওয়ার পর মূসা (আ.) আল্লাহর নির্দেশে তূর পাহাড়ে যান। সেখানে তিনি নির্ধারিত সময় অবস্থান করেন।",
-"আল্লাহ মূসা (আ.)-এর সঙ্গে কথা বলেন এবং তাঁকে তাওরাত কিতাব দান করেন। এতে বনী ইসরাইলের জন্য পথনির্দেশনা ও বিধান ছিল।",
-"মূসা (আ.)-এর অনুপস্থিতিতে তাঁর ভাই হারুন (আ.) সম্প্রদায়ের দায়িত্ব পালন করছিলেন। কিন্তু কিছু লোক সঠিক পথ থেকে সরে গিয়ে বাছুরের পূজা শুরু করে।",
-"হারুন (আ.) তাদের নিষেধ করেন এবং আল্লাহর ইবাদতে ফিরে আসতে বলেন। মূসা (আ.) ফিরে এসে এই ঘটনা জানতে পারেন এবং সম্প্রদায়কে ভুল কাজ থেকে ফিরে আসার নির্দেশ দেন।",
-"মূসা (আ.) তাঁর জাতিকে আল্লাহর বিধান মেনে চলতে, কৃতজ্ঞ হতে এবং সঠিক পথে থাকতে শিক্ষা দেন।"
-],
-lesson:"আল্লাহর দেওয়া বিধান অনুসরণ করতে হবে। কোনো মানুষ বা বস্তু ইবাদতের যোগ্য নয়, ইবাদত একমাত্র আল্লাহর জন্য।"
-},
-
-{
-title:"মূসা (আ.)-এর শিক্ষা ও উত্তরাধিকার",
-paragraphs:[
-"হযরত মূসা (আ.)-এর জীবনে অসংখ্য পরীক্ষা এসেছিল। শৈশবে ফেরাউনের প্রাসাদে বড় হওয়া, মাদইয়ানে যাত্রা, নবুওয়াত লাভ এবং অত্যাচারী শাসকের সামনে সত্য বলা—সবকিছুতেই আল্লাহর বিশেষ সাহায্য ছিল।",
-"তিনি বনী ইসরাইলকে আল্লাহর বিধান মেনে চলতে, ধৈর্য ধারণ করতে এবং অন্যায়ের বিরুদ্ধে দাঁড়াতে শিক্ষা দেন।",
-"কুরআনে মূসা (আ.)-এর ঘটনা বিভিন্ন স্থানে বর্ণিত হয়েছে। তাঁর জীবনের মাধ্যমে ঈমান, ধৈর্য, সাহস, তওবা এবং আল্লাহর ওপর নির্ভরতার শিক্ষা পাওয়া যায়।",
-"তাঁর ভাই হারুন (আ.)-এর সহযোগিতা এবং ফেরাউনের সামনে দুই নবীর দাওয়াত আমাদের শেখায় যে ভালো কাজে সহযোগিতা করা প্রয়োজন।",
-"মূসা (আ.)-এর কাহিনী শুধু অতীতের ঘটনা নয়; এটি বর্তমান জীবনের জন্যও গুরুত্বপূর্ণ শিক্ষা। সত্যের পথে থাকা, অহংকার থেকে বেঁচে থাকা এবং আল্লাহর আদেশ মানাই একজন মানুষের কর্তব্য।"
-],
-lesson:"সারকথা: ঈমান, ধৈর্য, সাহস, তওবা এবং আল্লাহর ওপর পূর্ণ ভরসা—মূসা (আ.)-এর জীবনের অন্যতম শিক্ষা।"
-}
-
-];
-
-/* BOOK STATE */
-
-let currentChapter=0;
-let fontSize=17;
-let bookmarked=readBookmark();
-
-function readBookmark(){
- try{
-  const saved=localStorage.getItem("sahinBookBookmark");
-  return saved===null? -1:Number(saved);
- }catch(e){return -1}
-}
-
-function saveBookmark(){
- try{
-  if(bookmarked<0)localStorage.removeItem("sahinBookBookmark");
-  else localStorage.setItem("sahinBookBookmark",String(bookmarked));
- }catch(e){}
-}
-
-/* OPEN / CLOSE */
-
-function openBook(){
- const reader=document.getElementById("reader");
- reader.classList.add("open");
- renderChapterList();
- renderChapter(bookmarked>=0?bookmarked:0);
- reader.scrollIntoView({behavior:"smooth"});
-}
-
-function closeBook(){
- document.getElementById("reader").classList.remove("open");
- document.getElementById("library").scrollIntoView({behavior:"smooth"});
-}
-
-/* RENDER */
-
-function renderChapterList(){
- const list=document.getElementById("chapterList");
- list.innerHTML="";
-
- chapters.forEach((chapter,index)=>{
-  const button=document.createElement("button");
-  button.className="chapter-item";
-  button.textContent=String(index+1).padStart(2,"0")+"  "+chapter.title;
-  button.onclick=()=>renderChapter(index);
-  list.appendChild(button);
- });
-}
-
-function renderChapter(index){
- if(index<0||index>=chapters.length)return;
-
- currentChapter=index;
- const chapter=chapters[index];
- const paper=document.getElementById("paper");
-
- paper.innerHTML=`
-  <div class="paper-label">CHAPTER ${String(index+1).padStart(2,"0")} / 10</div>
-  <h2>${chapter.title}</h2>
-  ${chapter.paragraphs.map(text=>`<p>${text}</p>`).join("")}
-  <div class="lesson"><strong>✦ শিক্ষণীয় বিষয়</strong><br>${chapter.lesson}</div>
-  <div class="paper-footer">
-   <span>লেখক: Sahin Hujur</span>
-   <span>${index+1} / 10</span>
-  </div>
- `;
-
- document.querySelectorAll(".chapter-item").forEach((button,i)=>{
-  button.classList.toggle("active",i===index);
- });
-
- document.getElementById("readerCounter").textContent=(index+1)+" / 10";
- document.getElementById("readBar").style.width=((index+1)/10*100)+"%";
-
- document.getElementById("previousChapter").disabled=index===0;
- document.getElementById("nextChapter").disabled=index===chapters.length-1;
-
- updateBookmark();
- paper.style.animation="none";
- void paper.offsetWidth;
- paper.style.animation="introUp .45s ease both";
-
- window.scrollTo({
-  top:document.getElementById("reader").getBoundingClientRect().top+window.scrollY-85,
-  behavior:"smooth"
- });
-}
-
-/* CONTROLS */
-
-function moveChapter(direction){
- renderChapter(currentChapter+direction);
-}
-
-function changeFont(amount){
- fontSize=Math.max(14,Math.min(24,fontSize+amount));
- document.querySelectorAll("#paper p").forEach(p=>{
-  p.style.fontSize=fontSize+"px";
- });
-}
-
-function toggleBookmark(){
- bookmarked=bookmarked===currentChapter?-1:currentChapter;
- saveBookmark();
- updateBookmark();
-}
-
-function updateBookmark(){
- const button=document.getElementById("bookmarkBtn");
- const status=document.getElementById("readerCounter");
-
- if(bookmarked===currentChapter){
-  button.textContent="★ Saved";
-  status.textContent="★ Bookmark saved";
- }else{
-  button.textContent="☆ Bookmark";
-  status.textContent=(currentChapter+1)+" / 10";
- }
-}
-
-/* KEYBOARD */
-
-document.addEventListener("keydown",event=>{
- const reader=document.getElementById("reader");
- if(!reader.classList.contains("open"))return;
-
- if(event.key==="ArrowRight")moveChapter(1);
- if(event.key==="ArrowLeft")moveChapter(-1);
-});
-
+function calcEgg(){const base=Math.max(0,Number($("baseEgg").value)||0),rebirth=Math.max(0,Math.floor(Number($("rebirths").value)||0));$("eggResult").textContent=`Egg limit: ${base*(rebirth+1)}\nFormula: ${base} × (${rebirth} + 1)`;showToast("Egg limit calculated")}
+function calcReward(){const a=Number($("rewardEach").value)||0,b=Number($("rewardCount").value)||0,c=Number($("rewardBonus").value)||0;$("rewardResult").textContent=`Total reward: ${a*b+c}\n(${a} × ${b}) + ${c}`;showToast("Reward calculated")}
+function makeTable(){const base=Math.max(0,Number($("tableBase").value)||0),levels=Math.min(20,Math.max(1,Math.floor(Number($("tableLevels").value)||1)));$("rebirthTable").textContent=Array.from({length:levels},(_,i)=>`${i} Rebirth${i===1?"":"s"} → ${base*(i+1)} eggs`).join("\n")}
+function makeArtPrompt(){const type=$("artType").value,subject=$("artSubject").value.trim()||"Roblox game",style=$("artStyle").value,mood=$("artMood").value,details=$("artDetails").value.trim();$("artOutput").textContent=`Create a professional ${type} for ${subject}.\n\nART DIRECTION: ${style}. Mood: ${mood}.\n\nCOMPOSITION: One clear focal point, strong readable silhouette, dynamic but clean framing, intentional lighting, polished materials, rich depth and clear subject separation.\n\nDETAILS: ${details||"Use visual elements that communicate the game's core gameplay immediately."}\n\nQUALITY: High-quality game key art, carefully composed, crisp edges, strong contrast, appealing color harmony, visually readable at small size.\n\nAVOID: Generic AI-looking clutter, random text, watermarks, logos that were not supplied, messy composition, tiny unreadable details.`;showToast("Image prompt created")}
+function makeShort(){const topic=$("shortTopic").value.trim()||"Roblox gameplay",style=$("shortStyle").value,length=$("shortLength").value;const hooks=["POV: You thought this was going to be easy…","Wait until you see what happens next.","Nobody expected this to happen in Roblox.","I tried this so you don't have to.","The last part is actually crazy."];const hook=hooks[Math.floor(Math.random()*hooks.length)];let structure=style.startsWith("Top 5")?"0–3s: Hook + title\n3–20s: Show the list quickly, one item at a time\n20–27s: Reveal the best or funniest pick\nFinal: Ask viewers which one they choose.":style.startsWith("Challenge")?"0–3s: State the challenge and rules\n3–10s: Start the attempt\n10–25s: Show the funniest or hardest moment\nFinal: Reveal the result and invite viewers to try.":style.startsWith("Game update")?"0–3s: Show the biggest change first\n3–15s: Demonstrate what changed\n15–25s: Explain why it matters\nFinal: Ask what should be added next.":style.startsWith("Gameplay")?"0–3s: Show the best moment as a teaser\n3–15s: Build up the gameplay\n15–25s: Payoff / unexpected moment\nFinal: Short reaction or question.":"0–3s: Relatable hook\n3–12s: Set up the situation\n12–25s: Escalate the funny moment\nFinal: Punchline + quick question."; $("shortOutput").textContent=`TOPIC: ${topic}\nSTYLE: ${style}\nLENGTH: ${length}\n\nHOOK:\n${hook}\n\nVIDEO STRUCTURE:\n${structure}\n\nON-SCREEN TEXT:\n${topic.toUpperCase()}\n\nCAPTION:\n${topic} 😂 What would you do? #roblox #shorts #gaming\n\nEDITING NOTES:\nUse quick cuts, readable captions, clear game audio, and show the strongest moment early. Keep the pacing natural; do not add fake reactions or misleading claims.`;showToast("Shorts plan generated")}
+function makeWebBrief(){const name=$("webName").value.trim()||"New Website",purpose=$("webPurpose").value.trim()||"A personal web project",theme=$("webTheme").value,features=$("webFeatures").value.trim()||"Responsive navigation, clear content sections and smooth interactions";$("webOutput").textContent=`PROJECT: ${name}\nPURPOSE: ${purpose}\nTHEME: ${theme}\n\nREQUIREMENTS:\n- Build as a responsive, mobile-first website.\n- Use semantic HTML, organized CSS and vanilla JavaScript.\n- Create a clear visual hierarchy and consistent spacing.\n- Add smooth, purposeful transitions and reduced-motion support.\n- Ensure buttons and forms have real working behavior.\n- Handle empty inputs and invalid states gracefully.\n- Keep the code readable and easy to edit.\n\nFEATURES:\n${features}\n\nDELIVERY:\nProvide a complete index.html when a single-file project is requested. Do not pretend API or server features work without a real backend. Include setup instructions and test all interactions.`;showToast("Website brief created")}
+function inspectCode(){const s=$("codeInput").value;const lines=s?s.split("\n").length:0;const chars=s.length;const words=(s.match(/\S+/g)||[]).length;const opens=(s.match(/[\{\[\(]/g)||[]).length;const closes=(s.match(/[\}\]\)]/g)||[]).length;const htmlTags=(s.match(/<([a-z][a-z0-9]*)\b/gi)||[]).length;const result=`Characters: ${chars}\nLines: ${lines}\nWords / tokens: ${words}\nOpening brackets: ${opens}\nClosing brackets: ${closes}\nHTML opening tags detected: ${htmlTags}\n\nBasic check: ${opens===closes?"Bracket counts match (not a full syntax check).":"Bracket counts differ — inspect your code."}\n\nNote: This is a quick text inspection only.`;$("codeOutput").textContent=result}
+function cleanText(){const el=$("codeInput");el.value=el.value.split("\n").map(line=>line.replace(/[ \t]+$/g,"")).join("\n").trim();showToast("Trailing whitespace trimmed")}
+function clearCode(){$("codeInput").value="";$("codeOutput").textContent="Paste some code and choose Inspect."}
+function addTask(){const project=$("taskProject").value,name=$("taskName").value.trim(),detail=$("taskDetail").value.trim();if(!name){showToast("Enter a task name first");return}tasks.unshift({id:Date.now()+Math.random(),project,name,detail,done:false});safeSet("orbit_tasks",tasks);$("taskName").value="";$("taskDetail").value="";renderPlanner();updateStats();showToast("Task saved on this device")}
+function renderTaskList(target,filter){const el=$(target);const list=filter?tasks.filter(filter):tasks;el.innerHTML="";if(!list.length){el.innerHTML='<p class="small-muted">No tasks yet. Add one from Game Planner.</p>';return}list.forEach(task=>{const row=document.createElement("div");row.className="task"+(task.done?" done":"");const check=document.createElement("input");check.type="checkbox";check.checked=task.done;check.addEventListener("change",()=>{task.done=check.checked;safeSet("orbit_tasks",tasks);renderPlanner();renderTasks();updateStats()});const span=document.createElement("span");span.textContent=task.name+" · "+task.project;const del=document.createElement("button");del.textContent="×";del.setAttribute("aria-label","Delete task");del.onclick=()=>{tasks=tasks.filter(t=>t.id!==task.id);safeSet("orbit_tasks",tasks);renderPlanner();renderTasks();updateStats()};row.append(check,span,del);el.appendChild(row);if(task.detail){const d=document.createElement("div");d.className="small-muted";d.style.padding="0 10px 6px";d.textContent=task.detail;el.appendChild(d)}})}
+function renderPlanner(){renderTaskList("plannerTasks");$("taskCount").textContent=tasks.length+" tasks"}
+function renderTasks(){renderTaskList("allTasks");}
+function clearCompleted(){tasks=tasks.filter(t=>!t.done);safeSet("orbit_tasks",tasks);renderTasks();renderPlanner();updateStats();showToast("Completed tasks cleared")}
+const lessonData=[["print()","Display a message or value in the Output window.","print(\"Hello, Roblox!\")"],["Variables","Store values using local variables.","local coins = 100"],["Functions","Reusable blocks of code that run when called.","local function sayHi() print(\"Hi\") end"],["Events","Run code when an event happens.","part.Touched:Connect(function(hit) print(hit.Name) end)"],["Conditions","Make decisions with if / then / else.","if coins >= 50 then print(\"Can buy\") end"]];
+function renderLessons(){const root=$("lessons");root.innerHTML="";lessonData.forEach((lesson,i)=>{const card=document.createElement("div");card.className="lesson-card"+(completedLessons.includes(i)?" done":"");const title=document.createElement("h4");title.textContent=(completedLessons.includes(i)?"✓ ":"")+`LESSON ${i+1}: ${lesson[0]}`;const p=document.createElement("p");p.textContent=lesson[1];const code=document.createElement("div");code.className="output";code.textContent=lesson[2];code.style.marginBottom="9px";const btn=document.createElement("button");btn.className="btn "+(completedLessons.includes(i)?"secondary":"primary");btn.textContent=completedLessons.includes(i)?"Completed":"Mark complete";btn.onclick=()=>{if(!completedLessons.includes(i))completedLessons.push(i);safeSet("orbit_lessons",completedLessons);renderLessons();updateStats()};card.append(title,p,code,btn);root.appendChild(card)})}
+const quizzes=[{q:"What does print() do?",o:["Creates a Part","Displays output","Saves player data"],a:1,e:"print() displays a value in the Output window."},{q:"Which keyword creates a local variable?",o:["local","function","return"],a:0,e:"Use local to declare a local variable."},{q:"What does a function help you do?",o:["Repeat reusable code","Change screen size","Publish a game"],a:0,e:"Functions let you organize reusable code."},{q:"Which event can detect a part being touched?",o:["PlayerAdded","Touched","Heartbeat"],a:1,e:"Touched fires when a part is touched."},{q:"Which keyword starts a condition?",o:["if","local","wait"],a:0,e:"if checks whether a condition is true."}];
+function renderQuiz(){const q=quizzes[quizIndex];$("quizQuestion").textContent=q.q;$("quizOptions").innerHTML="";$("quizFeedback").textContent="";q.o.forEach((option,i)=>{const b=document.createElement("button");b.className="quiz-option";b.textContent=option;b.onclick=()=>{$("quizFeedback").textContent=(i===q.a?"Correct! ":"Not quite. ")+q.e;$("quizFeedback").style.color=i===q.a?"var(--green)":"var(--amber)";[...$("quizOptions").children].forEach(x=>x.disabled=true)};$("quizOptions").appendChild(b)})}
+function nextQuiz(){quizIndex=(quizIndex+1)%quizzes.length;renderQuiz()}
+function updateStats(){$("statTasks").textContent=tasks.length;$("statDone").textContent=tasks.filter(t=>t.done).length;$("statLessons").textContent=completedLessons.length+"/5"}
+/* Initial render */
+generateLuau();calcEgg();calcReward();makeTable();renderPlanner();renderTasks();renderLessons();renderQuiz();updateStats();
 </script>
 </body>
 </html>
